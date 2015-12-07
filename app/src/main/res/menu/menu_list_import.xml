@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zai.nomwell.ListImportActivity">
+
+    <item
+        android:id="@+id/action_cancel"
+        android:orderInCategory="100"
+        android:title="@string/cancel"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_send"
+        android:orderInCategory="100"
+        android:title="@string/send"
+        app:showAsAction="always" />
+</menu>

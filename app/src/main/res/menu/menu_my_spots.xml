@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zai.nomwell.MySpotsActivity">
+    <item
+        android:id="@+id/action_lets_started"
+        android:orderInCategory="100"
+        android:title="Lets Started"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_fantastic"
+        android:orderInCategory="100"
+        android:title="Fantastic"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_confirm_email"
+        android:orderInCategory="100"
+        android:title="Confirm Email"
+        app:showAsAction="never" />
+</menu>
