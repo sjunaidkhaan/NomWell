@@ -20,6 +20,18 @@ public class NomwellSearchView {
     private ImageView imvwSearch;
     private ImageView imvwRemove;
     private AppCompatEditText txtSearch;
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.imvwSearch:
+                    break;
+                case R.id.imvwRemove:
+                    txtSearch.setText(null);
+                    break;
+            }
+        }
+    };
 
     public NomwellSearchView(View container) {
         this.container = container;
@@ -36,19 +48,6 @@ public class NomwellSearchView {
         imvwRemove.setOnClickListener(clickListener);
         txtSearch = (AppCompatEditText) container.findViewById(R.id.txtSearch);
     }
-
-    private View.OnClickListener clickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.imvwSearch:
-                    break;
-                case R.id.imvwRemove:
-                    txtSearch.setText(null);
-                    break;
-            }
-        }
-    };
 
     /**
      * set text in main AppCompatEditText

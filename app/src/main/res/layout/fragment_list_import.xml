@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/rlTo"
-        android:background="@color/material_grey" />
+        android:background="@color/material_gray" />
 
 
     <RelativeLayout
@@ -67,7 +67,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/rlCcBcc"
-        android:background="@color/material_grey" />
+        android:background="@color/material_gray" />
 
 
     <RelativeLayout
@@ -100,7 +100,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@+id/rlSubject"
-        android:background="@color/material_grey" />
+        android:background="@color/material_gray" />
 
 
     <RelativeLayout

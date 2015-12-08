@@ -30,6 +30,6 @@ public class MySpotVisitedFragment extends BaseFragment {
 
     @Override
     public String getFragmentTitle(Context context) {
-        return context.getString(R.string.visited);
+        return "";
     }
 }

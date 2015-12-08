@@ -45,4 +45,32 @@
     <string name="send">send</string>
     <string name="cancel">cancel</string>
     <string name="all_spot_empty_text">You have no spots yet!\n\nAdd places you want to try or have been to with the + below, or import an existing list from the sidebar</string>
+    <string name="my_lists_mine_empty_text">
+        You haven\'t made any lists yet!\n\n
+        Create your own lists, like \"Best Hipster-Watching Bars\",
+        from your place in My Spots.\n\nStart with the + below.</string>
+    <string name="my_lists_following_empty_text">
+        You aren\'t following any friends\' lists yet!\n\n
+        When a friend sends you a list, you can access it here and see any future changes to it.\n\n
+        If you have friends using Nomwell, go ask them to share a lists!</string>
+     <string name="my_lists_spot_recs_empty_text">
+        You haven\'t received any spot recommendations yet!\n\n
+        Friends can send you individual spot recs using the Share feature in My Spots,
+     without creating a list. Received recommendations will show up here.</string>
+
+    <string name="add_spots_empty_text">
+        Spots near you would normally be shown here, but GPS in Nomwell is currently disable.\n\n
+    To see nearby spots, enable GPS in Settings -> Location.</string>
+
+    <string name="mine">Mine</string>
+    <string name="following">Following</string>
+    <string name="spot_recs">Spot Recs</string>
+    <string name="must_add_places">You must add places to My Spots before using this feature!</string>
+    <string name="must_have_list">You must have lists before using this feature!</string>
+    <string name="ask_location_tile">Allow \"Nomwell\" to access your location while you use the app?</string>
+    <string name="ask_location_description">You\'ll then be able to see what spots are nearby</string>
+    <string name="title_activity_add_spots">Add Spots</string>
+    <string name="map">Map</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="papular_places_near_me">Popular Places Near Me</string>
 </resources>

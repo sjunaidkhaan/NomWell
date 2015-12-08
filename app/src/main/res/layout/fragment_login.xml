@@ -92,8 +92,8 @@
             android:visibility="invisible" />
 
         <android.support.v7.widget.AppCompatButton
-            style="@style/AppTheme.Button"
             android:id="@+id/btnSignUp"
+            style="@style/AppTheme.Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
