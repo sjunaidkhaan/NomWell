@@ -1,23 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zai.nomwell.fragments.MyListsMineFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcvwContent"
+    <com.malinskiy.superrecyclerview.SuperRecyclerView
+        android:id="@+id/rcvwSpots"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/txtEmpty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="@dimen/margin_large"
-        android:layout_marginRight="@dimen/margin_large"
-        android:gravity="center_horizontal"
-        android:text="@string/my_lists_spot_recs_empty_text"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
+        android:layout_height="match_parent"
+        app:layout_empty="@layout/empty_view_spot_recs" />
 
 </RelativeLayout>

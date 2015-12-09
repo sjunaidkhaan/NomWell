@@ -33,6 +33,6 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_my_spots"
-        app:menu="@menu/activity_my_spots_drawer" />
+        app:menu="@menu/menu_my_spots_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

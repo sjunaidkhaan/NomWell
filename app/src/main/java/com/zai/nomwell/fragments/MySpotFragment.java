@@ -27,10 +27,13 @@ import com.zai.nomwell.AddSpotsActivity;
 import com.zai.nomwell.ListImportActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.TabbedMapsActivity;
 import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
+import com.zai.nomwell.dialog.NomwellStarsDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
+import com.zai.nomwell.view.NonSwipeableViewPager;
 
 import java.util.ArrayList;
 
@@ -54,7 +57,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
     /**
      * The {@link ViewPager} that will host the section contents.
      */
-    private ViewPager mViewPager;
+    private NonSwipeableViewPager mViewPager;
     private TabLayout tabLayout;
 
     private ArrayList<BaseFragment> fragments;
@@ -91,7 +94,8 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) view.findViewById(R.id.container);
+        mViewPager = (NonSwipeableViewPager) view.findViewById(R.id.container);
+        mViewPager.setSwipeable(false);
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
 
@@ -123,6 +127,9 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        if (menu != null) {
+            menu.clear();
+        }
         inflater.inflate(R.menu.menu_my_spots, menu);
     }
 
@@ -134,6 +141,10 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_map:
+                Intent map = new Intent(getActivity(), TabbedMapsActivity.class);
+                startActivity(map);
+                break;
             case R.id.action_lets_started:
                 showLetsStartedDialog();
                 break;
@@ -215,6 +226,32 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         });
 
         nomwellInputDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void showStarsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Congrats on trying ");
+        final NomwellStarsDialog nomwellStarsDialog = new NomwellStarsDialog(getContext());
+        nomwellStarsDialog.setMessage(getContext().getString(R.string.howd_you_like_it));
+        nomwellStarsDialog.setNote("(Tap twice for full-stars)");
+        builder.setView(nomwellStarsDialog.getView());
+        final AlertDialog dialog = builder.create();
+
+        nomwellStarsDialog.setPositive("Done", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        nomwellStarsDialog.setNegative("Add More Details", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();

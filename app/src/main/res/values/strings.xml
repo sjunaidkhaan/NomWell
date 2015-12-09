@@ -73,4 +73,5 @@
     <string name="map">Map</string>
     <string name="title_activity_maps">Map</string>
     <string name="papular_places_near_me">Popular Places Near Me</string>
+    <string name="howd_you_like_it">How\'d you like it?</string>
 </resources>

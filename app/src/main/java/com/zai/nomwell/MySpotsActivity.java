@@ -13,9 +13,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.fragments.MyListsFragment;
 import com.zai.nomwell.fragments.MySpotFragment;
 import com.zai.nomwell.util.Util;
+
+import java.util.ArrayList;
 
 public class MySpotsActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +29,8 @@ public class MySpotsActivity extends BaseActivity
 
     private MySpotFragment mySpotFragment;
     private MyListsFragment myListsFragment;
+
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +49,12 @@ public class MySpotsActivity extends BaseActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setCheckedItem(R.id.nav_my_spots);
 
         int navigationBarHeight = Util.getNavBarHeight(this);
+        Util.log(TAG, "NavigationBar Hegith: " + navigationBarHeight);
         if (navigationBarHeight > 0) {
             View bottomButtons = findViewById(R.id.content);
             CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) bottomButtons.getLayoutParams();
@@ -58,12 +64,30 @@ public class MySpotsActivity extends BaseActivity
             bottomButtons.requestLayout();
         }
 
-        mySpotFragment = new MySpotFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.content, mySpotFragment, MySpotFragment.TAG)
-                .commit();
+        if (mySpotFragment == null) {
+            mySpotFragment = new MySpotFragment();
+        }
+        if (myListsFragment == null) {
+            myListsFragment = new MyListsFragment();
+        }
 
-        myListsFragment = new MyListsFragment();
+        setCurrentFragment(mySpotFragment);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateNavigationDrawer();
+    }
+
+    private void updateNavigationDrawer() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+        if (fragment == mySpotFragment) {
+            navigationView.setCheckedItem(R.id.nav_my_spots);
+        } else if (fragment == myListsFragment) {
+            navigationView.setCheckedItem(R.id.nav_my_lists);
+        }
     }
 
     @Override
@@ -88,17 +112,9 @@ public class MySpotsActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_my_spots) {
-            if (mySpotFragment != getCurrentFragment()) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, mySpotFragment, MySpotFragment.TAG)
-                        .commit();
-            }
+            setCurrentFragment(mySpotFragment);
         } else if (id == R.id.nav_my_lists) {
-            if (myListsFragment != getCurrentFragment()) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.content, myListsFragment, MyListsFragment.TAG)
-                        .commit();
-            }
+            setCurrentFragment(myListsFragment);
         } else if (id == R.id.nav_switch_cities) {
             startActivity(new Intent(this, ChooseCityActivity.class));
         } else if (id == R.id.nav_import_an_existing_list) {
@@ -112,6 +128,87 @@ public class MySpotsActivity extends BaseActivity
 
     private Fragment getCurrentFragment() {
         return getSupportFragmentManager().findFragmentById(R.id.content);
+    }
+
+    private void setCurrentFragment(Fragment fragment) {
+        if (fragment != getCurrentFragment()) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content, fragment, MyListsFragment.TAG)
+                    .commit();
+        }
+    }
+
+    public ArrayList<MySpotsData> getAllDummyData() {
+        ArrayList<MySpotsData> mySpotsData = new ArrayList<>();
+
+        MySpotsData msd = new MySpotsData();
+        msd.header = "Ada Street";
+        msd.info = "$$ - American (New)";
+        msd.subInfo = "Note: Try the quiche";
+        msd.rating = 5;
+        msd.status = MySpotsData.STATUS_GONE;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Alinea";
+        msd.info = "$$ - Japanese";
+        msd.subInfo = "";
+        msd.rating = 0;
+        msd.status = MySpotsData.STATUS_NO;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Au Cheval";
+        msd.info = "$$ - American (New)";
+        msd.subInfo = "Note: Burgers, Rec'd by Claydia w...";
+        msd.rating = 0;
+        msd.status = MySpotsData.STATUS_GONE;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Avec";
+        msd.info = "$$ - Fusion";
+        msd.subInfo = "Note: Don't come on the weekends...";
+        msd.rating = 4;
+        msd.status = MySpotsData.STATUS_WANT_TO_GO;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Balena";
+        msd.info = "$$ - Oyster Bars";
+        msd.subInfo = "Note: Oyster were mah";
+        msd.rating = 3;
+        msd.status = MySpotsData.STATUS_WANT_TO_GO;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Girls & the Goat";
+        msd.info = "$$ - New American";
+        msd.subInfo = "";
+        msd.rating = 3;
+        msd.status = MySpotsData.STATUS_GONE;
+        mySpotsData.add(msd);
+
+        msd = new MySpotsData();
+        msd.header = "Haymarket Pub & Brewery";
+        msd.info = "$$ - Brewery";
+        msd.subInfo = "";
+        msd.rating = 3;
+        msd.status = MySpotsData.STATUS_WANT_TO_GO;
+        mySpotsData.add(msd);
+
+        return mySpotsData;
+    }
+
+    public ArrayList<MySpotsData> getFilteredDummyData(int status) {
+        ArrayList<MySpotsData> all = getAllDummyData();
+        ArrayList<MySpotsData> filtered = new ArrayList<>();
+        for (MySpotsData msd : all) {
+            if (msd.status == status) {
+                filtered.add(msd);
+            }
+        }
+        return filtered;
     }
 
     @Override
