@@ -27,7 +27,7 @@ import com.zai.nomwell.AddSpotsActivity;
 import com.zai.nomwell.ListImportActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
-import com.zai.nomwell.TabbedMapsActivity;
+import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.dialog.NomwellStarsDialog;
@@ -142,7 +142,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_map:
-                Intent map = new Intent(getActivity(), TabbedMapsActivity.class);
+                Intent map = new Intent(getActivity(), TabbedMapActivity.class);
                 startActivity(map);
                 break;
             case R.id.action_lets_started:

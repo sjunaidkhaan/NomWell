@@ -13,8 +13,8 @@ import com.zai.nomwell.R;
  */
 public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
 
-    public AppCompatTextView lblWantToGo;
-    public AppCompatTextView lblGone;
+    public ImageView lblWantToGo;
+    public ImageView lblGone;
     public ImageView imvwIcon;
     public AppCompatTextView txtHeader;
     public AppCompatTextView txtInfo;
@@ -24,8 +24,8 @@ public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
     public MySpotsHolder(View itemView) {
         super(itemView);
 
-        lblWantToGo = (AppCompatTextView) itemView.findViewById(R.id.lblWantToGo);
-        lblGone = (AppCompatTextView) itemView.findViewById(R.id.lblGone);
+        lblWantToGo = (ImageView) itemView.findViewById(R.id.imvwWantToGo);
+        lblGone = (ImageView) itemView.findViewById(R.id.imvwGone);
 
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);

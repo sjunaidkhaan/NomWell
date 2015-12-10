@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.zai.nomwell.MapsActivity;
+import com.zai.nomwell.MapActivity;
 import com.zai.nomwell.R;
 
 /**
@@ -38,8 +38,8 @@ public class AddSpotsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_map:
-                Intent map = new Intent(getActivity(), MapsActivity.class);
-                map.putExtra(MapsActivity.EXTRA_TITLE, getString(R.string.papular_places_near_me));
+                Intent map = new Intent(getActivity(), MapActivity.class);
+                map.putExtra(MapActivity.EXTRA_TITLE, getString(R.string.papular_places_near_me));
                 startActivity(map);
                 break;
         }

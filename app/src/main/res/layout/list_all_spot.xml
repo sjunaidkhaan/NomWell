@@ -4,39 +4,40 @@
     android:id="@id/recyclerview_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:drag_edge="left"
     android:background="?attr/selectableItemBackground"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:drag_edge="left">
 
     <LinearLayout
         android:id="@+id/rlSwipeContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_large"
         android:weightSum="3">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/lblWantToGo"
+        <ImageView
+            android:id="@+id/imvwWantToGo"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
+            android:src="@drawable/ic_want_to_go"
             android:text="Want To Go"
             android:textSize="@dimen/text_size_header" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/lblGone"
+        <ImageView
+            android:id="@+id/imvwGone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
+            android:src="@drawable/ic_gone"
             android:text="Gone"
             android:textSize="@dimen/text_size_header" />
 
@@ -74,10 +75,10 @@
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
-                android:foregroundTint="@color/colorPrimaryDark"
-                android:layout_marginRight="@dimen/margin"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/txtHeader" />
+                android:layout_below="@+id/txtHeader"
+                android:layout_marginRight="@dimen/margin"
+                android:foregroundTint="@color/colorPrimaryDark" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/txtInfo"

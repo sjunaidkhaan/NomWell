@@ -56,12 +56,12 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".MapActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".TabbedMapsActivity"
+            android:name=".TabbedMapActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
