@@ -53,7 +53,7 @@ public class MySpotAllFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getAllDummyData());
+        adapter = new MySpotsAdapter(activity.getMySpotsDummyData());
         rcvwSpots.setAdapter(adapter);
     }
 

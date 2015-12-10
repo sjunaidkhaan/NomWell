@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.fragments.MyListsFragment;
 import com.zai.nomwell.fragments.MySpotFragment;
@@ -138,7 +139,7 @@ public class MySpotsActivity extends BaseActivity
         }
     }
 
-    public ArrayList<MySpotsData> getAllDummyData() {
+    public ArrayList<MySpotsData> getMySpotsDummyData() {
         ArrayList<MySpotsData> mySpotsData = new ArrayList<>();
 
         MySpotsData msd = new MySpotsData();
@@ -201,7 +202,7 @@ public class MySpotsActivity extends BaseActivity
     }
 
     public ArrayList<MySpotsData> getFilteredDummyData(int status) {
-        ArrayList<MySpotsData> all = getAllDummyData();
+        ArrayList<MySpotsData> all = getMySpotsDummyData();
         ArrayList<MySpotsData> filtered = new ArrayList<>();
         for (MySpotsData msd : all) {
             if (msd.status == status) {
@@ -209,6 +210,42 @@ public class MySpotsActivity extends BaseActivity
             }
         }
         return filtered;
+    }
+
+    public ArrayList<MyListsData> getMyListsDummyData() {
+        ArrayList<MyListsData> mlds = new ArrayList<>();
+
+        MyListsData mld = new MyListsData();
+        mld.header = "Breakfast of Champions";
+        mld.info = "22 spots, 13 followers";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Demo";
+        mld.info = "11 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Great Coffee";
+        mld.info = "17 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Mad Picks";
+        mld.info = "14 spots, 13 followers";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Nab it and Go Eats";
+        mld.info = "17 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Taco Flavoured Kisses";
+        mld.info = "22 spots (13 in Chicago, IL)";
+        mlds.add(mld);
+
+        return mlds;
     }
 
     @Override

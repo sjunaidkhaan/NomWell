@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
-import com.zai.nomwell.adapter.MySpotsAdapter;
+import com.zai.nomwell.adapter.MyListsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +22,7 @@ public class MyListsFollowingFragment extends BaseFragment {
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
-    private MySpotsAdapter adapter;
+    private MyListsAdapter adapter;
 
     private MySpotsActivity activity;
 
@@ -53,7 +53,7 @@ public class MyListsFollowingFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getAllDummyData());
+        adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Unfollow List");
         rcvwSpots.setAdapter(adapter);
     }
 
