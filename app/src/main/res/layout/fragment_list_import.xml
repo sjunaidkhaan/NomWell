@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:background="@android:color/transparent"
-            android:inputType="text"
+            android:inputType="text|textMultiLine"
             android:padding="@dimen/edittext_padding" />
     </RelativeLayout>
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.zai.nomwell.StartingActivity"
+    tools:showIn="@layout/activity_starting">
+
+    <ImageView
+        android:id="@+id/imvwIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_square_white" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imvwIcon"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+        android:backgroundTint="@color/blue"
+        android:text="Sign Up with Facebook"
+        android:textColor="@color/white" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnFacebook"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+        android:backgroundTint="@color/white"
+        android:text="Sign Up with Email"
+        android:textColor="@color/colorPrimary" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/chbxSendMeAwesomeEmails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnEmail"
+        android:layout_marginLeft="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin"
+        android:backgroundTint="@color/white"
+        android:text="Send me awesome emails from Nomwell. We'll keep your info private"
+        android:textColor="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/rlLoginInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chbxSendMeAwesomeEmails"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="center_horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/lblAlreadyMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already a member?"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_toRightOf="@id/lblAlreadyMember"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtSlash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginRight="@dimen/margin"
+            android:layout_toRightOf="@id/txtLogin"
+            android:text="/"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_toRightOf="@id/txtSlash"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:text="Skip Sign Up"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_normal"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtTerms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="View our Terms of Use and Privacy Policy"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

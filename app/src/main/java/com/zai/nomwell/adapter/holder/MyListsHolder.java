@@ -3,9 +3,12 @@ package com.zai.nomwell.adapter.holder;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
+import com.malinskiy.superrecyclerview.swipe.SwipeLayout;
 import com.zai.nomwell.R;
+import com.zai.nomwell.util.Util;
 
 /**
  * Created by chitta on 12/8/15.
@@ -16,6 +19,7 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
     public ImageView imvwIcon;
     public AppCompatTextView txtHeader;
     public AppCompatTextView txtInfo;
+    private LinearLayout llSwipeContent;
 
     public MyListsHolder(View itemView, String swipeButtonText) {
         super(itemView);
@@ -26,5 +30,10 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
         txtInfo = (AppCompatTextView) itemView.findViewById(R.id.txtInfo);
+
+        llSwipeContent = (LinearLayout) itemView.findViewById(R.id.llSwipeContent);
+        int totalWidth = Util.getScreenWidth(itemView.getContext());
+        SwipeLayout.LayoutParams params = (SwipeLayout.LayoutParams) llSwipeContent.getLayoutParams();
+        params.width = totalWidth / 3;
     }
 }

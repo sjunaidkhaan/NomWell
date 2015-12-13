@@ -9,12 +9,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.fragments.MyListsFragment;
 import com.zai.nomwell.fragments.MySpotFragment;
 import com.zai.nomwell.util.Util;
@@ -43,6 +46,8 @@ public class MySpotsActivity extends BaseActivity
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        startActivity(new Intent(this, IntroActivity.class));
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,7 +60,7 @@ public class MySpotsActivity extends BaseActivity
         navigationView.setCheckedItem(R.id.nav_my_spots);
 
         int navigationBarHeight = Util.getNavBarHeight(this);
-        Util.log(TAG, "NavigationBar Hegith: " + navigationBarHeight);
+        Util.log(TAG, "NavigationBar Height: " + navigationBarHeight);
         if (navigationBarHeight > 0) {
             View bottomButtons = findViewById(R.id.content);
             CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) bottomButtons.getLayoutParams();
@@ -119,7 +124,7 @@ public class MySpotsActivity extends BaseActivity
         } else if (id == R.id.nav_switch_cities) {
             startActivity(new Intent(this, ChooseCityActivity.class));
         } else if (id == R.id.nav_import_an_existing_list) {
-
+            showLetsStartedDialog();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -137,6 +142,56 @@ public class MySpotsActivity extends BaseActivity
                     .replace(R.id.content, fragment, MyListsFragment.TAG)
                     .commit();
         }
+    }
+
+    /**
+     * shows the first dialog
+     */
+    private void showLetsStartedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.now_lets_get_started));
+        NomwellListDialog nomwellListDialog = new NomwellListDialog(this);
+        nomwellListDialog.setMessage(getString(R.string.lets_get_started_message));
+        nomwellListDialog.setOptions(getResources().getStringArray(R.array.lets_started_options));
+        builder.setView(nomwellListDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dialog.dismiss();
+                if (i == 0) {
+                    showFantasticDialog();
+                }
+                updateNavigationDrawer();
+            }
+        });
+
+        dialog.show();
+    }
+
+    /**
+     * shows Fantastic dialog
+     */
+
+    private void showFantasticDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.fantastic_));
+        NomwellListDialog nomwellListDialog = new NomwellListDialog(this);
+        nomwellListDialog.setMessage(getString(R.string.where_is_your_list_located_));
+        nomwellListDialog.setOptions(getResources().getStringArray(R.array.list_location_options));
+        builder.setView(nomwellListDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 0) {
+                    startActivity(new Intent(MySpotsActivity.this, ListImportActivity.class));
+                }
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     public ArrayList<MySpotsData> getMySpotsDummyData() {

@@ -1,18 +1,13 @@
 package com.zai.nomwell.fragments;
 
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -21,16 +16,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.zai.nomwell.AddSpotsActivity;
-import com.zai.nomwell.ListImportActivity;
-import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.dialog.NomwellInputDialog;
-import com.zai.nomwell.dialog.NomwellListDialog;
-import com.zai.nomwell.dialog.NomwellStarsDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
 import com.zai.nomwell.view.NonSwipeableViewPager;
@@ -145,17 +135,8 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
                 Intent map = new Intent(getActivity(), TabbedMapActivity.class);
                 startActivity(map);
                 break;
-            case R.id.action_lets_started:
-                showLetsStartedDialog();
-                break;
-            case R.id.action_fantastic:
-                showFantasticDialog();
-                break;
             case R.id.action_confirm_email:
                 showConfirmEmailDialog();
-                break;
-            case R.id.action_ask_location:
-                showLocationAccessDialog();
                 break;
         }
 
@@ -163,51 +144,6 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         return true;
     }
 
-    /**
-     * shows the first dialog
-     */
-    private void showLetsStartedDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getString(R.string.now_lets_get_started));
-        NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
-        nomwellListDialog.setMessage(getString(R.string.lets_get_started_message));
-        nomwellListDialog.setOptions(getResources().getStringArray(R.array.lets_started_options));
-        builder.setView(nomwellListDialog.getView());
-        final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-    /**
-     * shows Fantastic dialog
-     */
-
-    private void showFantasticDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getString(R.string.fantastic_));
-        NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
-        nomwellListDialog.setMessage(getString(R.string.where_is_your_list_located_));
-        nomwellListDialog.setOptions(getResources().getStringArray(R.array.list_location_options));
-        builder.setView(nomwellListDialog.getView());
-        final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i == 0) {
-                    startActivity(new Intent(getActivity(), ListImportActivity.class));
-                }
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
 
     private void showConfirmEmailDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -235,46 +171,6 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
         dialog.show();
     }
 
-    private void showStarsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle("Congrats on trying ");
-        final NomwellStarsDialog nomwellStarsDialog = new NomwellStarsDialog(getContext());
-        nomwellStarsDialog.setMessage(getContext().getString(R.string.howd_you_like_it));
-        nomwellStarsDialog.setNote("(Tap twice for full-stars)");
-        builder.setView(nomwellStarsDialog.getView());
-        final AlertDialog dialog = builder.create();
-
-        nomwellStarsDialog.setPositive("Done", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        nomwellStarsDialog.setNegative("Add More Details", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void showLocationAccessDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setTitle(getContext().getString(R.string.ask_location_tile));
-        builder.setMessage(getContext().getString(R.string.ask_location_description));
-        builder.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                askForLocation();
-            }
-        });
-        builder.setNegativeButton("Don't Allow", null);
-        builder.create().show();
-    }
-
     @Override
     public void onClick(View view) {
         Util.log(TAG, "Clicked");
@@ -283,25 +179,11 @@ public class MySpotFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.llAddSpots:
-                showLocationAccessDialog();
+                startActivity(new Intent(getActivity(), AddSpotsActivity.class));
                 break;
 
             case R.id.llAddToLists:
                 break;
-        }
-    }
-
-    private void askForLocation() {
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(getActivity(),
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MySpotsActivity.PERMISSIONS_REQUEST_LOCATION);
-        } else {
-            startActivity(new Intent(getActivity(), AddSpotsActivity.class));
         }
     }
 

@@ -2,29 +2,29 @@ package com.zai.nomwell.dialog;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatRatingBar;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.zai.nomwell.R;
 
 /**
  * Created by chitta on 12/6/15.
  */
-public class NomwellStarsDialog {
+public class NomwellImageDialog {
 
     private View view;
 
     private AppCompatTextView txtMessage;
-    private AppCompatTextView txtNote;
-    private AppCompatRatingBar ratingBar;
+    private AppCompatImageView imvwImage;
 
     private AppCompatButton btnPositive;
     private AppCompatButton btnNegative;
 
-    public NomwellStarsDialog(Context context) {
-        this.view = LayoutInflater.from(context).inflate(R.layout.dialog_message_stars, null);
+    public NomwellImageDialog(Context context) {
+        this.view = LayoutInflater.from(context).inflate(R.layout.dialog_message_image, null);
         init();
     }
 
@@ -34,10 +34,11 @@ public class NomwellStarsDialog {
 
     private void init() {
         txtMessage = (AppCompatTextView) view.findViewById(R.id.txtMessage);
-        txtNote = (AppCompatTextView) view.findViewById(R.id.txtNote);
-        ratingBar = (AppCompatRatingBar) view.findViewById(R.id.ratingBar);
+        imvwImage = (AppCompatImageView) view.findViewById(R.id.imvwImage);
         btnPositive = (AppCompatButton) view.findViewById(R.id.btnPositive);
+        btnPositive.setVisibility(View.GONE);
         btnNegative = (AppCompatButton) view.findViewById(R.id.btnNegative);
+        btnNegative.setVisibility(View.GONE);
     }
 
     public String getMessage() {
@@ -48,28 +49,18 @@ public class NomwellStarsDialog {
         txtMessage.setText(message);
     }
 
-    public String getNote() {
-        return txtNote.getText().toString();
-    }
-
-    public void setNote(String note) {
-        txtNote.setText(note);
-    }
-
-    public int getStars() {
-        return ratingBar.getNumStars();
-    }
-
-    public void setStars(int stars) {
-        ratingBar.setNumStars(stars);
+    public void setImage(int resourceId) {
+        Glide.with(view.getContext()).load(resourceId).into(imvwImage);
     }
 
     public void setPositive(String text, View.OnClickListener listener) {
+        btnPositive.setVisibility(View.VISIBLE);
         btnPositive.setText(text);
         btnPositive.setOnClickListener(listener);
     }
 
     public void setNegative(String text, View.OnClickListener listener) {
+        btnNegative.setVisibility(View.VISIBLE);
         btnNegative.setText(text);
         btnNegative.setOnClickListener(listener);
     }

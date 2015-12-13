@@ -4,23 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/imvwImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_margin" />
+
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/txtMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dialog_margin"
-        android:textAppearance="?android:attr/textAppearanceListItemSmall" />
-
-    <android.support.v7.widget.AppCompatRatingBar
-        android:id="@+id/ratingBar"
-        style="?android:attr/ratingBarStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:numStars="5" />
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/txtNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dialog_margin"
@@ -32,8 +23,7 @@
         android:gravity="right"
         android:paddingBottom="@dimen/dialog_button_padding"
         android:paddingLeft="@dimen/dialog_button_padding"
-        android:paddingRight="@dimen/dialog_button_padding"
-        android:paddingTop="@dimen/dialog_margin">
+        android:paddingRight="@dimen/dialog_button_padding">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnNegative"
@@ -51,4 +41,5 @@
             android:text="Positive"
             android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
+
 </LinearLayout>

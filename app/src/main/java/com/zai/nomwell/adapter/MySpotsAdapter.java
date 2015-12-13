@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
 import com.zai.nomwell.R;
 import com.zai.nomwell.adapter.holder.MySpotsHolder;
+import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MySpotsData;
 
 import java.util.ArrayList;
@@ -19,13 +20,16 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
 
     private ArrayList<MySpotsData> mySpotsData;
 
-    public MySpotsAdapter(ArrayList<MySpotsData> mySpotsData) {
+    private OnRecyclerViewClickListener clickListener;
+
+    public MySpotsAdapter(ArrayList<MySpotsData> mySpotsData, OnRecyclerViewClickListener clickListener) {
+        this.clickListener = clickListener;
         this.mySpotsData = mySpotsData;
     }
 
     @Override
     public MySpotsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MySpotsHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_all_spot, null));
+        return new MySpotsHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_all_spot, null), clickListener);
     }
 
     @Override

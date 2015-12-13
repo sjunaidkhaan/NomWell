@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.zai.nomwell.IntroActivity"
+    tools:showIn="@layout/activity_intro">
+
+    <LinearLayout
+        android:id="@+id/llIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imvw1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_med"
+            android:paddingRight="@dimen/padding_med"
+            android:paddingTop="@dimen/padding_med"
+            android:src="@drawable/indicator_selected" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imvw2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_med"
+            android:paddingRight="@dimen/padding_med"
+            android:paddingTop="@dimen/padding_med"
+            android:src="@drawable/indicator_normal" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imvw3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_med"
+            android:paddingRight="@dimen/padding_med"
+            android:paddingTop="@dimen/padding_med"
+            android:src="@drawable/indicator_normal" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/btnNext"
+        style="@style/AppTheme.Button"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="?attr/selectableItemBackground"
+        android:visibility="invisible" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnNext"
+        android:layout_below="@id/llIndicator" />
+
+</RelativeLayout>

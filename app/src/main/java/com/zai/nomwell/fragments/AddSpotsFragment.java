@@ -1,8 +1,14 @@
 package com.zai.nomwell.fragments;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zai.nomwell.MapActivity;
+import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 
 /**
@@ -25,6 +32,7 @@ public class AddSpotsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        showLocationAccessDialog();
         return inflater.inflate(R.layout.fragment_add_spots, container, false);
     }
 
@@ -44,5 +52,31 @@ public class AddSpotsFragment extends Fragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showLocationAccessDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle(getContext().getString(R.string.ask_location_tile));
+        builder.setMessage(getContext().getString(R.string.ask_location_description));
+        builder.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                askForLocation();
+            }
+        });
+        builder.setNegativeButton("Don't Allow", null);
+        builder.create().show();
+    }
+
+    private void askForLocation() {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MySpotsActivity.PERMISSIONS_REQUEST_LOCATION);
+        }
     }
 }

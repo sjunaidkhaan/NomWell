@@ -55,7 +55,7 @@ public class MySpotVisitedFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE));
+        adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE), null);
         rcvwSpots.setAdapter(adapter);
     }
 

@@ -53,7 +53,7 @@ public class MyListsFollowingFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Unfollow List");
+        adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Unfollow\nList");
         rcvwSpots.setAdapter(adapter);
     }
 

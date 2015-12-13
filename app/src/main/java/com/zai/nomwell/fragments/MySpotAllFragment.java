@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.adapter.MySpotsAdapter;
+import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
+import com.zai.nomwell.dialog.NomwellStarsDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MySpotAllFragment extends BaseFragment {
+public class MySpotAllFragment extends BaseFragment implements OnRecyclerViewClickListener {
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
@@ -53,8 +56,50 @@ public class MySpotAllFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getMySpotsDummyData());
+        adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), this);
         rcvwSpots.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        switch (view.getId()) {
+            case R.id.imvwWantToGo:
+                break;
+            case R.id.imvwGone:
+                showStarsDialog();
+                break;
+        }
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+
+    }
+
+    private void showStarsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Congrats on trying ");
+        final NomwellStarsDialog nomwellStarsDialog = new NomwellStarsDialog(getContext());
+        nomwellStarsDialog.setMessage(getContext().getString(R.string.howd_you_like_it));
+        nomwellStarsDialog.setNote("(Tap twice for full-stars)");
+        builder.setView(nomwellStarsDialog.getView());
+        final AlertDialog dialog = builder.create();
+
+        nomwellStarsDialog.setPositive("Done", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        nomwellStarsDialog.setNegative("Add More Details", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 
     @Override

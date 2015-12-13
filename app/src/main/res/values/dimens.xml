@@ -25,4 +25,5 @@
     <dimen name="list_icon_size">40dp</dimen>
     <dimen name="text_size_header">20sp</dimen>
     <dimen name="text_size_header_small">18sp</dimen>
+    <dimen name="size_indicator">20dp</dimen>
 </resources>

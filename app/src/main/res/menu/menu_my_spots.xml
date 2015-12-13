@@ -11,26 +11,9 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_lets_started"
-        android:orderInCategory="100"
-        android:title="Lets Started"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_fantastic"
-        android:orderInCategory="100"
-        android:title="Fantastic"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/action_confirm_email"
         android:orderInCategory="100"
         android:title="Confirm Email"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_ask_location"
-        android:orderInCategory="100"
-        android:title="Confirm Email"
-        app:showAsAction="never" />
 </menu>

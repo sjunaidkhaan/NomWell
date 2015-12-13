@@ -32,6 +32,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:theme="@style/AppCompatDark"
         app:headerLayout="@layout/nav_header_my_spots"
         app:menu="@menu/menu_my_spots_drawer" />
 
