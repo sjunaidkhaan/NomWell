@@ -231,7 +231,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 break;
 
             case R.id.llAddSpots:
-                if (rcvwSpots.getAdapter().getItemCount() > 0) {
+                if (rcvwSpots != null && rcvwSpots.getAdapter().getItemCount() > 0) {
                     startActivity(new Intent(getActivity(), AddSpotsActivity.class));
                 } else {
                     showEmptyListDialog();

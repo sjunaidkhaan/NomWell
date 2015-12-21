@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dialog_margin"
         android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
         android:textAppearance="?android:attr/textAppearanceListItemSmall" />
 
     <ListView

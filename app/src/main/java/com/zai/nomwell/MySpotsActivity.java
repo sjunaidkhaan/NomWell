@@ -10,12 +10,14 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.bumptech.glide.Glide;
 import com.zai.nomwell.adapter.NavigationArrayAdapter;
 import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.db.MySpotsData;
@@ -64,6 +66,8 @@ public class MySpotsActivity extends BaseActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        AppCompatImageView imvwIcon = (AppCompatImageView) navigationView.findViewById(R.id.imageView);
+        Glide.with(this).load(R.drawable.horiz_color_with_icon).into(imvwIcon);
         listOptions = (ListView) navigationView.findViewById(R.id.listOptions);
         listOptions.setAdapter(new NavigationArrayAdapter(this, R.layout.navigation_simple_text_item_1,
                 android.R.id.text1, OPTIONS));
@@ -219,7 +223,7 @@ public class MySpotsActivity extends BaseActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.fantastic_));
         NomwellListDialog nomwellListDialog = new NomwellListDialog(this);
-        nomwellListDialog.setMessage(getString(R.string.where_is_your_list_located_));
+        nomwellListDialog.setMessage("Where is your list located");
         nomwellListDialog.setOptions(getResources().getStringArray(R.array.list_location_options));
         builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();

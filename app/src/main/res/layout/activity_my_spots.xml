@@ -42,9 +42,8 @@
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
-                android:layout_height="50dp"
-                android:paddingLeft="@dimen/padding_med"
-                android:src="@drawable/horiz_color_with_icon" />
+                android:layout_height="200dp"
+                android:paddingLeft="@dimen/padding_med" />
 
             <ListView
                 android:id="@+id/listOptions"
