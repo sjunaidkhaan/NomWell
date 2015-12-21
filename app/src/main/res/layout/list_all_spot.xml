@@ -4,7 +4,6 @@
     android:id="@id/recyclerview_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
     app:drag_edge="left"
     app:leftEdgeSwipeOffset="200dp"
@@ -13,16 +12,16 @@
     <LinearLayout
         android:id="@+id/llSwipeContent"
         android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_height="match_parent">
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/imvwWantToGo"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.5"
             android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
@@ -32,10 +31,10 @@
         <ImageView
             android:id="@+id/imvwGone"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal|center_vertical"
             android:layout_toRightOf="@id/imvwWantToGo"
+            android:layout_weight="0.5"
             android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
@@ -47,7 +46,8 @@
     <RelativeLayout
         android:id="@+id/rlMainContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/imvwIcon"
@@ -74,7 +74,7 @@
 
             <android.support.v7.widget.AppCompatRatingBar
                 android:id="@+id/ratingBar"
-                style="?android:attr/ratingBarStyleSmall"
+                style="@style/ratingBar18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtHeader"

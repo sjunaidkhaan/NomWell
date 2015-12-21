@@ -1,6 +1,8 @@
 package com.zai.nomwell.view;
 
 import android.support.v7.widget.AppCompatTextView;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 
 import com.zai.nomwell.R;
@@ -34,7 +36,9 @@ public class NomwellHalfClickableTextView {
     }
 
     public void setClickableText(String text) {
-        txtClickableText.setText(text);
+        SpannableString content = new SpannableString(text);
+        content.setSpan(new UnderlineSpan(), 0, text.length(), 0);
+        txtClickableText.setText(content);
     }
 
     public String getClickableText() {

@@ -29,7 +29,8 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
 
     @Override
     public MySpotsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MySpotsHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_all_spot, null), clickListener);
+        return new MySpotsHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_all_spot, null), clickListener);
     }
 
     @Override
@@ -43,13 +44,13 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
         if (msd.status == MySpotsData.STATUS_GONE) {
             icon = R.drawable.ic_done_white_24dp;
         } else if (msd.status == MySpotsData.STATUS_WANT_TO_GO) {
-            icon = R.drawable.ic_pin_drop_white_36dp;
+            icon = R.drawable.ic_pin;
         } else if (msd.status == MySpotsData.STATUS_GONE) {
             icon = R.drawable.ic_add_white_36dp;
         }
         holder.imvwIcon.setImageResource(icon);
         holder.imvwIcon.setColorFilter(
-                ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimaryDark));
+                ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimary));
         holder.ratingBar.setNumStars(msd.rating);
         if (msd.status == MySpotsData.STATUS_GONE) {
             holder.ratingBar.setVisibility(View.VISIBLE);

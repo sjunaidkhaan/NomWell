@@ -27,8 +27,8 @@
     <string name="now_lets_get_started">Now let\'s get started</string>
     <string name="lets_get_started_message">Do you have an existing restaurant list (like notes app or spreadsheet) that you want to import?</string>
     <string name="fantastic_">Fantastic!</string>
-    <string name="where_is_your_list_located_">Where is your list located?</string>
-    <string name="confirm_email_address">Colio. Please confirm your email address</string>
+    <string name="where_is_your_list_located_">We\'ll send you an email with instructions on how to finish the import process from your computer. (It\'s super easy.)</string>
+    <string name="confirm_email_address">Coolio. Please confirm your email address</string>
     <string name="enter_email_address">Enter email address</string>
 
     <string-array name="lets_started_options">
@@ -74,8 +74,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="papular_places_near_me">Popular Places Near Me</string>
     <string name="howd_you_like_it">How\'d you like it?</string>
-    <string name="title_activity_starting">Starting</string>
+    <string name="title_activity_starting">" "</string>
     <string name="title_activity_intro">Intro</string>
     <string name="to_quickly_add_spots_to_your_list">To quickly add spots to your list</string>
     <string name="swipe_right">Swipe Right</string>
+    <string name="title_activity_add_new_spot">Add New Spot</string>
 </resources>

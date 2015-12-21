@@ -4,13 +4,14 @@
     android:id="@id/recyclerview_swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/selectableItemBackground"
     android:orientation="vertical"
-    app:drag_edge="right">
+    app:drag_edge="right"
+    app:leftEdgeSwipeOffset="200dp"
+    app:show_mode="pull_out">
 
     <LinearLayout
         android:id="@+id/llSwipeContent"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="right"
         android:orientation="horizontal"
@@ -34,8 +35,7 @@
     <RelativeLayout
         android:id="@+id/rlMainContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/selectableItemBackground">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imvwIcon"

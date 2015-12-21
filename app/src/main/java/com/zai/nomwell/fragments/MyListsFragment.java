@@ -12,19 +12,22 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.zai.nomwell.R;
+import com.zai.nomwell.dialog.NomwellListDialog;
+import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
+import com.zai.nomwell.view.NomwellTab;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyListsFragment extends Fragment {
+public class MyListsFragment extends Fragment implements View.OnClickListener {
 
     public static final String TAG = "my_lists_fragment";
 
@@ -49,6 +52,10 @@ public class MyListsFragment extends Fragment {
     private NomwellHalfClickableTextView halfClickableTextView;
 
     private boolean dateSet = false;
+
+    private NomwellTab tab1;
+    private NomwellTab tab2;
+    private NomwellTab tab3;
 
     public MyListsFragment() {
         // Required empty public constructor
@@ -80,22 +87,93 @@ public class MyListsFragment extends Fragment {
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) view.findViewById(R.id.container);
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                updateTabs(position);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout.setOnTabSelectedListener(tabSelectedListener);
 
         halfClickableTextView = new NomwellHalfClickableTextView(view.findViewById(R.id.layoutSuggestion));
-        halfClickableTextView.setNormalText("Current City:");
+        halfClickableTextView.setNormalText("For City:");
         halfClickableTextView.setClickableText("Seattle, WA");
 
+        view.findViewById(R.id.llShare).setOnClickListener(this);
+        view.findViewById(R.id.llCreateLists).setOnClickListener(this);
+
         setViews();
+    }
+
+    private void updateTabs(int position) {
+        switch (position) {
+            case 0:
+                tab1.setSelected(true);
+                tab2.setSelected(false);
+                tab3.setSelected(false);
+                break;
+            case 1:
+                tab1.setSelected(false);
+                tab2.setSelected(true);
+                tab3.setSelected(false);
+                break;
+            case 2:
+                tab1.setSelected(false);
+                tab2.setSelected(false);
+                tab3.setSelected(true);
+                break;
+        }
     }
 
     private void setViews() {
         if (!dateSet) {
             mViewPager.setAdapter(mSectionsPagerAdapter);
-            tabLayout.setupWithViewPager(mViewPager);
+//            tabLayout.setupWithViewPager(mViewPager);
+
+            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
+            tab1.setText("MINE");
+            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
+            tab2.setText("FOLLOWING");
+            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
+            tab3.setText("SPOT RECS");
+//            tabLayout.addTab(tabLayout.newTab());
+//            tabLayout.addTab(tabLayout.newTab());
+//            tabLayout.addTab(tabLayout.newTab());
+            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
+            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
+            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
         }
     }
+
+    private TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener() {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab) {
+            updateTabs(tab.getPosition());
+            mViewPager.setCurrentItem(tab.getPosition());
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab) {
+
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab) {
+
+        }
+    };
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -103,34 +181,36 @@ public class MyListsFragment extends Fragment {
         inflater.inflate(R.menu.menu_my_lists, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.action_initial_dialog:
-                showAddPlacesDialog();
+    private void showEmptyMustHaveListDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
+        nomwellListDialog.setMessage(getContext().getString(R.string.must_have_list));
+        nomwellListDialog.setOptions(new String[]{"OK"});
+        builder.setView(nomwellListDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        Util.log(TAG, "Clicked");
+        switch (view.getId()) {
+            case R.id.llShare:
                 break;
 
-            case R.id.action_must_have_list:
-                showMustHaveListDialog();
+            case R.id.llCreateLists:
+                showEmptyMustHaveListDialog();
                 break;
         }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void showAddPlacesDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(getContext().getString(R.string.must_add_places));
-        builder.setPositiveButton("OK", null);
-        builder.create().show();
-    }
-
-    private void showMustHaveListDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage(getContext().getString(R.string.must_have_list));
-        builder.setPositiveButton("OK", null);
-        builder.create().show();
     }
 
     /**

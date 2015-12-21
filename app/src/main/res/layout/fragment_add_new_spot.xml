@@ -1,0 +1,214 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_back_color"
+    tools:context="com.zai.nomwell.AddNewSpotFragment"
+    tools:showIn="@layout/activity_add_new_spot">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cwUpper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/vwCenter1"
+                        android:layout_width="@dimen/stroke_width"
+                        android:layout_height="@dimen/stroke_width"
+                        android:layout_centerHorizontal="true" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtSpotName"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/vwCenter1"
+                        android:drawableLeft="@drawable/ic_cutlery"
+                        android:text="New American" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtSpotInfo"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/vwCenter1"
+                        android:drawableLeft="@drawable/ic_attach_money_grey600_24dp"
+                        android:text="$$$$" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtPhoneNumber"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtSpotInfo"
+                        android:layout_toRightOf="@id/vwCenter1"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:text="(312) 3777-2002" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtWebsiteAddress"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtPhoneNumber"
+                        android:layout_toRightOf="@id/vwCenter1"
+                        android:drawableLeft="@drawable/ic_www"
+                        android:text="www.newamerican.com" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtAddress"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtWebsiteAddress"
+                        android:drawableLeft="@drawable/ic_home"
+                        android:text="615 W Randolph St, Chicago, IL 60661" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/txtAddress"
+                        android:layout_below="@id/txtSpotName"
+                        android:layout_toLeftOf="@id/vwCenter1">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/imvwMap"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/imvwTag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true" />
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtMoreDetail"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtAddress"
+                        android:layout_toLeftOf="@id/vwCenter1"
+                        android:text="More Details" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtSpotLikeThis"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtAddress"
+                        android:layout_toRightOf="@id/vwCenter1"
+                        android:drawableLeft="@drawable/ic_add_circle_grey600_24dp"
+                        android:text="Spot Like This" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cwLower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cwUpper"
+                android:layout_marginTop="@dimen/margin_large">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:id="@+id/vwCenter2"
+                        android:layout_width="@dimen/stroke_width"
+                        android:layout_height="@dimen/stroke_width"
+                        android:layout_centerHorizontal="true" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtMyDetail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/vwCenter2"
+                        android:padding="@dimen/edittext_padding"
+                        android:text="My Detail"
+                        android:textStyle="bold" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/vwCenter2"
+                        android:padding="@dimen/textview_padding">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/imvwRatingIcon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_done_grey600_24dp" />
+
+                        <android.support.v7.widget.AppCompatRatingBar
+                            android:id="@+id/ratingBar"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/textview_padding"
+                            android:layout_toRightOf="@id/imvwRatingIcon"
+                            android:numStars="5"
+                            android:rating="2"
+                            android:text="$$$$" />
+
+                    </RelativeLayout>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtTags"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtMyDetail"
+                        android:drawableLeft="@drawable/ic_tag"
+                        android:text="BYOB" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtList"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtTags"
+                        android:drawableLeft="@drawable/ic_list_grey600_24dp"
+                        android:text="Breakfast of Champions, Demo" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/txtNote"
+                        style="@style/AppTheme.AddSpotTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtList"
+                        android:drawableLeft="@drawable/ic_notes"
+                        android:text="Don't come on weekends, Way too busy.\nIts best to go at 5 on weekday." />
+
+                    <CheckBox
+                        android:id="@+id/chbxVisibleToPublic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/txtNote"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:text="Make Note visible when sharing spot." />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

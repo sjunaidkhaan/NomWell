@@ -44,20 +44,16 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
+        style="@style/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/white"
-        app:tabIndicatorHeight="@dimen/tab_indicator_width"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/material_gray_light" />
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tabs"
-        android:layout_marginLeft="@dimen/margin">
+        android:background="@color/app_back_color">
 
         <include
             android:id="@+id/layoutSuggestion"
@@ -74,20 +70,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/material_gray_light"
+        android:background="@color/app_back_color"
         android:padding="@dimen/padding">
 
         <LinearLayout
-            android:id="@+id/llContAddSpots"
+            android:id="@+id/llContAddLists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:orientation="vertical"
+            android:background="@color/app_back_color"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large">
 
             <LinearLayout
+                android:id="@+id/llCreateLists"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -98,12 +96,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_add_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_add_spots" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Create List" />
             </LinearLayout>
         </LinearLayout>
@@ -112,13 +112,15 @@
             android:id="@+id/llContShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/llContAddSpots"
-            android:orientation="vertical"
+            android:layout_toLeftOf="@+id/llContAddLists"
+            android:background="@color/app_back_color"
             android:gravity="center_horizontal"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large">
 
             <LinearLayout
+                android:id="@+id/llShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -129,24 +131,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_share_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_share" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Share" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/llContAddToLists"
+            android:id="@+id/llCreate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/llContAddSpots"
+            android:layout_toRightOf="@+id/llContAddLists"
+            android:background="@color/app_back_color"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
-            android:gravity="center_horizontal"
             android:paddingRight="@dimen/padding_large"
             android:visibility="invisible">
 
@@ -161,12 +166,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_playlist_add_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_add_spots" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Add to Lists" />
             </LinearLayout>
         </LinearLayout>

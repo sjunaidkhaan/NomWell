@@ -1,7 +1,7 @@
 package com.zai.nomwell.adapter;
 
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
@@ -37,9 +37,10 @@ public class MyListsAdapter extends BaseSwipeAdapter<MyListsHolder> {
         MyListsData mld = myListData.get(position);
         holder.txtHeader.setText(mld.header);
         holder.txtInfo.setText(mld.info);
-        holder.imvwIcon.setImageResource(mld.iconResource);
-        holder.imvwIcon.setColorFilter(
-                ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimaryDark));
+//        holder.imvwIcon.setImageResource(mld.iconResource);
+//        holder.imvwIcon.setColorFilter(
+//                ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimaryDark));
+        holder.imvwIcon.setVisibility(View.GONE);
 
     }
 

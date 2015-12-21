@@ -1,7 +1,6 @@
 package com.zai.nomwell.fragments;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import android.view.ViewGroup;
 import com.zai.nomwell.MapActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.dialog.NomwellInfoDialog;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -57,15 +57,24 @@ public class AddSpotsFragment extends Fragment {
     private void showLocationAccessDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getContext().getString(R.string.ask_location_tile));
-        builder.setMessage(getContext().getString(R.string.ask_location_description));
-        builder.setPositiveButton("Allow", new DialogInterface.OnClickListener() {
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
+        nomwellInfoDialog.setMessage(getContext().getString(R.string.ask_location_description));
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Allow", new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+            public void onClick(View view) {
                 askForLocation();
+                dialog.dismiss();
             }
         });
-        builder.setNegativeButton("Don't Allow", null);
-        builder.create().show();
+        nomwellInfoDialog.setNegative("Don't Allow", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void askForLocation() {

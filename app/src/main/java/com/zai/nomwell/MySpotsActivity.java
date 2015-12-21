@@ -14,9 +14,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
+import com.zai.nomwell.adapter.NavigationArrayAdapter;
 import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.fragments.MyListsFragment;
 import com.zai.nomwell.fragments.MySpotFragment;
@@ -25,7 +28,7 @@ import com.zai.nomwell.util.Util;
 import java.util.ArrayList;
 
 public class MySpotsActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "MySpotsActivity";
 
@@ -35,6 +38,10 @@ public class MySpotsActivity extends BaseActivity
     private MyListsFragment myListsFragment;
 
     private NavigationView navigationView;
+    private ListView listOptions;
+
+    private static final String OPTIONS[] = {"My Spots  ", "My Lists",
+            "Explore Friends' Spots", "Switch Cities", "Import an Existing List"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +64,11 @@ public class MySpotsActivity extends BaseActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        navigationView.setCheckedItem(R.id.nav_my_spots);
+        listOptions = (ListView) navigationView.findViewById(R.id.listOptions);
+        listOptions.setAdapter(new NavigationArrayAdapter(this, R.layout.navigation_simple_text_item_1,
+                android.R.id.text1, OPTIONS));
+        listOptions.setOnItemClickListener(this);
+//        navigationView.setCheckedItem(R.id.nav_my_spots);
 
         int navigationBarHeight = Util.getNavBarHeight(this);
         Util.log(TAG, "NavigationBar Height: " + navigationBarHeight);
@@ -91,8 +102,10 @@ public class MySpotsActivity extends BaseActivity
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
         if (fragment == mySpotFragment) {
             navigationView.setCheckedItem(R.id.nav_my_spots);
+            getSupportActionBar().setTitle("My Spots");
         } else if (fragment == myListsFragment) {
             navigationView.setCheckedItem(R.id.nav_my_lists);
+            getSupportActionBar().setTitle("My Lists");
         }
     }
 
@@ -119,8 +132,10 @@ public class MySpotsActivity extends BaseActivity
 
         if (id == R.id.nav_my_spots) {
             setCurrentFragment(mySpotFragment);
+            getSupportActionBar().setTitle("My Spots");
         } else if (id == R.id.nav_my_lists) {
             setCurrentFragment(myListsFragment);
+            getSupportActionBar().setTitle("My Lists");
         } else if (id == R.id.nav_switch_cities) {
             startActivity(new Intent(this, ChooseCityActivity.class));
         } else if (id == R.id.nav_import_an_existing_list) {
@@ -169,6 +184,33 @@ public class MySpotsActivity extends BaseActivity
         dialog.show();
     }
 
+    private void showConfirmEmailDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.confirm_email_address));
+        final NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(this);
+        nomwellInputDialog.setMessage(getString(R.string.where_is_your_list_located_));
+        nomwellInputDialog.setHint(getString(R.string.enter_email_address));
+        builder.setView(nomwellInputDialog.getView());
+        final AlertDialog dialog = builder.create();
+
+        nomwellInputDialog.setPositive("Submit", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        nomwellInputDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+
     /**
      * shows Fantastic dialog
      */
@@ -186,6 +228,8 @@ public class MySpotsActivity extends BaseActivity
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
                     startActivity(new Intent(MySpotsActivity.this, ListImportActivity.class));
+                } else if (i == 1) {
+                    showConfirmEmailDialog();
                 }
                 dialog.dismiss();
             }
@@ -311,5 +355,23 @@ public class MySpotsActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        if (position == 0) {
+            setCurrentFragment(mySpotFragment);
+            getSupportActionBar().setTitle("My Spots");
+        } else if (position == 1) {
+            setCurrentFragment(myListsFragment);
+            getSupportActionBar().setTitle("My Lists");
+        } else if (position == 3) {
+            startActivity(new Intent(this, ChooseCityActivity.class));
+        } else if (position == 4) {
+            showLetsStartedDialog();
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
     }
 }

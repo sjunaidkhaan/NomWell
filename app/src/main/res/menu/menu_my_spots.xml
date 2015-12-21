@@ -4,6 +4,13 @@
     tools:context="com.zai.nomwell.MySpotsActivity">
 
     <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_nav_filter"
+        android:orderInCategory="100"
+        android:title="Map"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_map"
         android:icon="@drawable/ic_map_white_24dp"
         android:orderInCategory="100"
@@ -15,5 +22,10 @@
         android:orderInCategory="100"
         android:title="Confirm Email"
         app:showAsAction="never" />
+
+    <item android:id="@+id/populateData"
+        android:orderInCategory="100"
+        android:title="Populate Data"
+        app:showAsAction="never"/>
 
 </menu>

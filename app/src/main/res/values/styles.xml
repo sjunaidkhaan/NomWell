@@ -15,6 +15,26 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+    </style>
+
+    <style name="tabLayout">
+        <item name="android:tabStripEnabled">false</item>
+        <item name="tabPaddingStart">@dimen/stroke_width</item>
+        <item name="tabPaddingEnd">@dimen/stroke_width</item>
+        <item name="android:paddingBottom">@dimen/padding</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+    </style>
+
+    <style name="ratingBar18" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbars_18</item>
+    </style>
+
+    <style name="ratingBar24" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbars_24</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -29,6 +49,13 @@
     <style name="AppTheme.EditText">
         <item name="android:background">@drawable/bg_edittext</item>
         <item name="android:padding">@dimen/edittext_padding</item>
+    </style>
+
+    <style name="AppTheme.AddSpotTextView">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:padding">@dimen/textview_padding</item>
+        <item name="android:drawablePadding">@dimen/textview_padding</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Borderless">

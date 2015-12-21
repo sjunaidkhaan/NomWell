@@ -22,9 +22,9 @@
         android:layout_below="@id/imvwIcon"
         android:layout_marginLeft="@dimen/margin_large"
         android:layout_marginRight="@dimen/margin_large"
-        android:backgroundTint="@color/blue"
         android:text="Sign Up with Facebook"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        app:backgroundTint="@color/blue" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btnEmail"
@@ -45,9 +45,10 @@
         android:layout_marginLeft="@dimen/margin_large"
         android:layout_marginRight="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin"
-        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/white"
         android:text="Send me awesome emails from Nomwell. We'll keep your info private"
-        android:textColor="@color/white" />
+        android:textColor="@color/colorPrimary"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/rlLoginInfo"
@@ -87,7 +88,8 @@
             android:layout_toRightOf="@id/txtLogin"
             android:text="/"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_normal" />
+            android:textSize="@dimen/text_size_normal"
+            android:visibility="gone" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/txtSignUp"
@@ -100,7 +102,8 @@
             android:text="Skip Sign Up"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_normal"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatTextView

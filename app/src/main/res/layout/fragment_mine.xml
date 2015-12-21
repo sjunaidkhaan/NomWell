@@ -11,4 +11,11 @@
         android:layout_height="match_parent"
         app:layout_empty="@layout/empty_view_mine" />
 
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/empty_view_mine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
 </RelativeLayout>

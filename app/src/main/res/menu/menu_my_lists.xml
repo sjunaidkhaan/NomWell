@@ -4,14 +4,8 @@
     tools:context="com.zai.nomwell.MySpotsActivity">
 
     <item
-        android:id="@+id/action_initial_dialog"
+        android:id="@+id/action_populate_list"
         android:orderInCategory="100"
-        android:title="Lets Started"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_must_have_list"
-        android:orderInCategory="100"
-        android:title="Must List"
+        android:title="Populate List"
         app:showAsAction="never" />
 </menu>

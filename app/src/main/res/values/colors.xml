@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ef5350</color>
-    <color name="colorPrimaryDark">#d32f2f</color>
+    <color name="colorPrimary">#FF696B</color>
+    <color name="colorPrimaryDark">#CF5259</color>
     <color name="colorAccent">#ff9e80</color>
 
     <color name="white">#ffffff</color>
@@ -13,4 +13,7 @@
     <color name="blue">#2962ff</color>
 
     <color name="selected_indicator">#C3D9FA</color>
+
+    <color name="app_back_color">#DEE2E5</color>
+    <color name="badge_color">#678EF7</color>
 </resources>

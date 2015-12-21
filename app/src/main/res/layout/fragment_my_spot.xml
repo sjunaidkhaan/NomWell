@@ -44,19 +44,16 @@
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
+        style="@style/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:tabIndicatorColor="@color/white"
-        app:tabIndicatorHeight="@dimen/tab_indicator_width"
-        app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/material_gray_light" />
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/rlTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tabs">
+        android:layout_below="@id/tabs"
+        android:background="@color/app_back_color">
 
         <include
             android:id="@+id/layoutSuggestion"
@@ -78,14 +75,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/material_gray_light"
+        android:background="@color/app_back_color"
         android:padding="@dimen/padding">
 
         <LinearLayout
-            android:id="@+id/llContAddSpots"
+            android:id="@+id/llContAddLists"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:background="@color/app_back_color"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
@@ -103,12 +101,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_add_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_add_spots" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Add Spots" />
             </LinearLayout>
         </LinearLayout>
@@ -117,7 +117,8 @@
             android:id="@+id/llContShare"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/llContAddSpots"
+            android:layout_toLeftOf="@+id/llContAddLists"
+            android:background="@color/app_back_color"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
@@ -135,12 +136,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_share_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_share" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Share" />
             </LinearLayout>
         </LinearLayout>
@@ -149,7 +152,8 @@
             android:id="@+id/llContAddToLists"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/llContAddSpots"
+            android:layout_toRightOf="@+id/llContAddLists"
+            android:background="@color/app_back_color"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
@@ -167,24 +171,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_playlist_add_grey600_36dp" />
+                    android:background="@color/app_back_color"
+                    android:src="@drawable/ic_add_to_lists" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:background="@color/app_back_color"
                     android:text="Add to Lists" />
             </LinearLayout>
 
         </LinearLayout>
     </RelativeLayout>
 
-    <com.zai.nomwell.view.NonSwipeableViewPager
-        android:id="@+id/container"
+    <com.malinskiy.superrecyclerview.SuperRecyclerView
+        android:id="@+id/rcvwSpots"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/llBottomButtons"
         android:layout_below="@id/rlTop"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_empty="@layout/empty_view_my_spots_all" />
+
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/empty_view_my_spots_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
