@@ -178,6 +178,9 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        if (menu != null) {
+            menu.clear();
+        }
         inflater.inflate(R.menu.menu_my_lists, menu);
     }
 
