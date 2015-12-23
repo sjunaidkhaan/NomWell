@@ -27,7 +27,7 @@
         app:backgroundTint="@color/blue" />
 
     <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btnEmail"
+        android:id="@+id/btnSignUpWithEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btnFacebook"
@@ -41,7 +41,7 @@
         android:id="@+id/chbxSendMeAwesomeEmails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnEmail"
+        android:layout_below="@id/btnSignUpWithEmail"
         android:layout_marginLeft="@dimen/margin_large"
         android:layout_marginRight="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin"

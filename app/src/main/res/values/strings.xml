@@ -83,4 +83,6 @@
     <string name="to_quickly_add_spots_to_your_list">To quickly add spots to your list</string>
     <string name="swipe_right">Swipe Right</string>
     <string name="title_activity_add_new_spot">Add New Spot</string>
+    <string name="title_activity_add_tag">AddTagActivity</string>
+    <string name="last_step_desc">To connect you with friends in your contacts, please enter your phone number for matching purposes.\n(It won\'t be used for anything else)</string>
 </resources>

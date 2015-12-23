@@ -32,10 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:paddingBottom="@dimen/dialog_button_padding"
-        android:paddingLeft="@dimen/dialog_button_padding"
-        android:paddingRight="@dimen/dialog_button_padding"
-        android:paddingTop="@dimen/dialog_margin">
+        android:padding="@dimen/dialog_button_padding">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnNegative"

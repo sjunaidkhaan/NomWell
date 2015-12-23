@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import com.zai.nomwell.R;
+import com.zai.nomwell.dialog.NomwellInfoDialog;
+import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
@@ -214,6 +216,65 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
                 showEmptyMustHaveListDialog();
                 break;
         }
+    }
+
+    /**
+     * page 88
+     */
+    private void showListInputDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(getContext());
+        nomwellInputDialog.setMessage("What's the name of your list?");
+        final AlertDialog dialog = builder.create();
+        nomwellInputDialog.setPositive("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInputDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * page 93
+     */
+    private void showSendToFriendDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Want to send this list to friends?");
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
+        nomwellInfoDialog.setMessage("The will be able to view it in browser and follow it in Nomwell.");
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Yes", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * page 96, 115
+     *
+     * @param info
+     */
+    private void showInfoDialog(String info) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(info);
+        builder.setPositiveButton("OK", null);
+        builder.create().show();
     }
 
     /**

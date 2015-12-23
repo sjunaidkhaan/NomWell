@@ -26,6 +26,7 @@ import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MySpotsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
+import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.dialog.NomwellStarsDialog;
 import com.zai.nomwell.util.Util;
@@ -223,6 +224,30 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         dialog.show();
     }
 
+    /**
+     * page 93
+     */
+    private void showUnfollowDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
+        nomwellInfoDialog.setMessage("Are you sure you want to unfollow this list?");
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Yes", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
     @Override
     public void onClick(View view) {
         Util.log(TAG, "Clicked");
@@ -259,6 +284,9 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
 
     }
 
+    /**
+     * page 77
+     */
     private void showStarsDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Congrats on trying ");
@@ -278,6 +306,66 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         nomwellStarsDialog.setNegative("Add More Details", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    /**
+     * page 132, 141
+     *
+     * @param info
+     */
+    private void showInfoDialog(String info) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage(info);
+        builder.setPositiveButton("OK", null);
+        builder.create().show();
+    }
+
+    /**
+     * page 109
+     */
+    private void showSendToFriendDialog(String spotName, String option) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Save all these places to " + spotName);
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
+        nomwellInfoDialog.setMessage("They'll be added as " + option + " by default.");
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Yes", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * page 62
+     *
+     * @param spotName
+     */
+
+    private void showSpotAddedDialog(String spotName) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
+        nomwellListDialog.setMessage("Spot added to " + spotName);
+        nomwellListDialog.setOptions(new String[]{"OK"});
+        builder.setView(nomwellListDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
             }
         });

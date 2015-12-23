@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.zai.nomwell.adapter.NavigationArrayAdapter;
 import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.fragments.MyListsFragment;
@@ -239,6 +240,58 @@ public class MySpotsActivity extends BaseActivity
             }
         });
 
+        dialog.show();
+    }
+
+    /**
+     * Friend's spots
+     * page 2
+     */
+    private void showSendToFriendDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("You must provide access to your phone contacts to use this feature.");
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(this);
+        nomwellInfoDialog.setMessage("Allow Nomwell to access contacts?");
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Allow", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Don't Allow", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    /**
+     * Friend's spots
+     * page 3
+     */
+    private void showLastStepDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Last Step");
+        final NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(this);
+        nomwellInputDialog.setMessage(getString(R.string.last_step_desc));
+        builder.setView(nomwellInputDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInputDialog.setPositive("Submit", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInputDialog.setNegative("Back", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
         dialog.show();
     }
 

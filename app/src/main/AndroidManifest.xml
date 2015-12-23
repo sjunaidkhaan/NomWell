@@ -60,13 +60,13 @@
         <activity
             android:name=".StartingActivity"
             android:label="@string/title_activity_starting"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IntroActivity"
             android:label="@string/title_activity_intro"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddNewSpot"
+            android:name=".AddNewSpotActivity"
             android:label="@string/title_activity_add_new_spot"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -78,6 +78,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AddTagActivity"
+            android:label="@string/title_activity_add_tag"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
