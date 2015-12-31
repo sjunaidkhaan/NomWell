@@ -58,7 +58,7 @@ public class MySpotPinnedFragment extends BaseFragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), null);
+        adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, null);
         rcvwSpots.setAdapter(adapter);
     }
 

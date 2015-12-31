@@ -1,13 +1,18 @@
 package com.zai.nomwell;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.dialog.NomwellImageDialog;
+import com.zai.nomwell.util.Util;
 
-public class AddSpotsActivity extends BaseActivity {
+import java.util.ArrayList;
+
+public class AddSpotsActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,8 @@ public class AddSpotsActivity extends BaseActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         showTutorialDialog();
+
+
     }
 
     private void showTutorialDialog() {
@@ -39,4 +46,44 @@ public class AddSpotsActivity extends BaseActivity {
         dialog.show();
     }
 
+    public ArrayList<MyListsData> getMyListsDummyData() {
+        ArrayList<MyListsData> mlds = new ArrayList<>();
+
+        MyListsData mld = new MyListsData();
+        mld.header = "Breakfast of Champions";
+        mld.info = "22 spots, 13 followers";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Demo";
+        mld.info = "11 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Great Coffee";
+        mld.info = "17 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Mad Picks";
+        mld.info = "14 spots, 13 followers";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Nab it and Go Eats";
+        mld.info = "17 spots";
+        mlds.add(mld);
+
+        mld = new MyListsData();
+        mld.header = "Taco Flavoured Kisses";
+        mld.info = "22 spots (13 in Chicago, IL)";
+        mlds.add(mld);
+
+        return mlds;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
 }

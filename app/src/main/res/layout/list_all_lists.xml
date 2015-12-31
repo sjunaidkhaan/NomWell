@@ -26,7 +26,7 @@
             android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
-            android:text="Delete"
+            android:text="Unfollow List"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_header" />
 

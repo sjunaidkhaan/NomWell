@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellInputDialog;
@@ -110,31 +111,36 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         tabLayout.setOnTabSelectedListener(tabSelectedListener);
 
         halfClickableTextView = new NomwellHalfClickableTextView(view.findViewById(R.id.layoutSuggestion));
-        halfClickableTextView.setNormalText("For City:");
+        halfClickableTextView.setNormalText("For:");
         halfClickableTextView.setClickableText("Seattle, WA");
+        halfClickableTextView.addClickListener(this);
 
         view.findViewById(R.id.llShare).setOnClickListener(this);
         view.findViewById(R.id.llCreateLists).setOnClickListener(this);
 
         setViews();
+
+        view.findViewById(R.id.llShare).setOnClickListener(this);
+        view.findViewById(R.id.llCreateLists).setOnClickListener(this);
     }
+
 
     private void updateTabs(int position) {
         switch (position) {
             case 0:
-                tab1.setSelected(true);
-                tab2.setSelected(false);
-                tab3.setSelected(false);
+//                tab1.setSelected(true);
+//                tab2.setSelected(false);
+//                tab3.setSelected(false);
                 break;
             case 1:
-                tab1.setSelected(false);
-                tab2.setSelected(true);
-                tab3.setSelected(false);
+//                tab1.setSelected(false);
+//                tab2.setSelected(true);
+//                tab3.setSelected(false);
                 break;
             case 2:
-                tab1.setSelected(false);
-                tab2.setSelected(false);
-                tab3.setSelected(true);
+//                tab1.setSelected(false);
+//                tab2.setSelected(false);
+//                tab3.setSelected(true);
                 break;
         }
     }
@@ -142,20 +148,20 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
     private void setViews() {
         if (!dateSet) {
             mViewPager.setAdapter(mSectionsPagerAdapter);
-//            tabLayout.setupWithViewPager(mViewPager);
+            tabLayout.setupWithViewPager(mViewPager);
 
-            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
-            tab1.setText("MINE");
-            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
-            tab2.setText("FOLLOWING");
-            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
-            tab3.setText("SPOT RECS");
-//            tabLayout.addTab(tabLayout.newTab());
-//            tabLayout.addTab(tabLayout.newTab());
-//            tabLayout.addTab(tabLayout.newTab());
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
+//            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
+//            tab1.setText("MINE");
+//            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
+//            tab2.setText("FOLLOWING");
+//            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
+//            tab3.setText("SPOT RECS");
+////            tabLayout.addTab(tabLayout.newTab());
+////            tabLayout.addTab(tabLayout.newTab());
+////            tabLayout.addTab(tabLayout.newTab());
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
         }
     }
 
@@ -198,6 +204,7 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
+                showListInputDialog();
             }
         });
 
@@ -210,10 +217,17 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         Util.log(TAG, "Clicked");
         switch (view.getId()) {
             case R.id.llShare:
+                showSendToFriendDialog();
                 break;
 
             case R.id.llCreateLists:
-                showEmptyMustHaveListDialog();
+                showListInputDialog();
+                break;
+
+            case R.id.txtClickable:
+                MySpotsActivity msa = (MySpotsActivity) getActivity();
+                msa.showIOSDialog(new String[]{"Chicago, IL (46)", "Nashville, TN (9)", "San Francisco, CA (15)"
+                , "Settle, WA(25)"});
                 break;
         }
     }
@@ -221,15 +235,18 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
     /**
      * page 88
      */
-    private void showListInputDialog() {
+    public void showListInputDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(getContext());
+        final NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(getContext());
         nomwellInputDialog.setMessage("What's the name of your list?");
+        builder.setView(nomwellInputDialog.getView());
         final AlertDialog dialog = builder.create();
         nomwellInputDialog.setPositive("OK", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                String text = nomwellInputDialog.getInputText();
+                showInfoDialog("Spot added to " + text);
             }
         });
         nomwellInputDialog.setNegative("Cancel", new View.OnClickListener() {
@@ -238,12 +255,13 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
                 dialog.dismiss();
             }
         });
+        dialog.show();
     }
 
     /**
      * page 93
      */
-    private void showSendToFriendDialog() {
+    public void showSendToFriendDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Want to send this list to friends?");
         NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
@@ -254,6 +272,7 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                showInfoDialog("List Sent");
             }
         });
         nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {

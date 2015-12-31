@@ -1,6 +1,7 @@
 package com.zai.nomwell;
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -21,6 +22,8 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
     private GoogleMap mMap;
 
     private Marker prevMarker = null;
+
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

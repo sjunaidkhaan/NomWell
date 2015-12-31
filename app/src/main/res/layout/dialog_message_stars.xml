@@ -16,7 +16,7 @@
         android:id="@+id/ratingBar"
         style="@style/ratingBar24"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:numStars="5" />
 
@@ -32,7 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:padding="@dimen/dialog_button_padding">
+        android:paddingLeft="@dimen/dialog_button_padding"
+        android:paddingRight="@dimen/dialog_button_padding"
+        android:paddingBottom="@dimen/dialog_button_padding">
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btnNegative"

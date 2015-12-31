@@ -58,6 +58,16 @@
             android:layout_marginRight="@dimen/margin_large"
             android:src="@drawable/ic_search_black_24dp" />
 
+        <ImageView
+            android:id="@+id/imvwCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_med"
+            android:layout_marginRight="@dimen/margin_med"
+            android:src="@drawable/ic_sendmode_unchecked_24" />
+
         <RelativeLayout
             android:id="@+id/rlContent"
             android:layout_width="match_parent"
@@ -77,6 +87,7 @@
                 style="@style/ratingBar18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_above="@+id/txtSubInfo"
                 android:layout_below="@+id/txtHeader"
                 android:layout_marginRight="@dimen/margin"
                 android:foregroundTint="@color/colorPrimaryDark" />

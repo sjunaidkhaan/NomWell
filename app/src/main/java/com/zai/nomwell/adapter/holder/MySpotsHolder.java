@@ -21,13 +21,14 @@ public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
     public ImageView imvwWanToGo;
     public ImageView imvwGone;
     public ImageView imvwIcon;
+    public ImageView imvwCheck;
     public AppCompatTextView txtHeader;
     public AppCompatTextView txtInfo;
     public AppCompatTextView txtSubInfo;
     public AppCompatRatingBar ratingBar;
     private LinearLayout llSwipeContent;
 
-    public MySpotsHolder(View itemView, OnRecyclerViewClickListener clickListener) {
+    public MySpotsHolder(View itemView, boolean showCheck, OnRecyclerViewClickListener clickListener) {
         super(itemView);
 
         this.clickListener = clickListener;
@@ -36,6 +37,8 @@ public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
         imvwWanToGo.setOnClickListener(this);
         imvwGone = (ImageView) itemView.findViewById(R.id.imvwGone);
         imvwGone.setOnClickListener(this);
+        imvwCheck = (ImageView) itemView.findViewById(R.id.imvwCheck);
+        imvwCheck.setOnClickListener(this);
 
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
@@ -47,6 +50,8 @@ public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
         int totalWidth = Util.getScreenWidth(itemView.getContext());
         SwipeLayout.LayoutParams params = (SwipeLayout.LayoutParams) llSwipeContent.getLayoutParams();
         params.width = totalWidth / 2;
+
+        imvwCheck.setVisibility(showCheck ? View.VISIBLE : View.GONE);
     }
 
     @Override

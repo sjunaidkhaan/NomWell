@@ -4,7 +4,6 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -42,16 +41,35 @@
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:paddingLeft="@dimen/padding_med" />
+                android:layout_height="50dp"
+                android:paddingLeft="@dimen/padding_med"
+                android:paddingRight="@dimen/padding_med"
+                android:paddingTop="@dimen/padding_med" />
 
-            <ListView
-                android:id="@+id/listOptions"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/imageView"
-                android:divider="@color/white"
-                android:dividerHeight="@dimen/stroke_width" />
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_width"
+                    android:background="@color/white" />
+
+                <ListView
+                    android:id="@+id/listOptions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@color/white"
+                    android:dividerHeight="@dimen/stroke_width" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stroke_width"
+                    android:background="@color/white" />
+
+            </LinearLayout>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/imvwGear"

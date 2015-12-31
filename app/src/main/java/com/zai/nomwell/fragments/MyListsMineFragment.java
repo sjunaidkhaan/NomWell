@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,11 +20,13 @@ import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MyListsAdapter;
+import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
+import com.zai.nomwell.dialog.NomwellInfoDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyListsMineFragment extends BaseFragment {
+public class MyListsMineFragment extends BaseFragment implements OnRecyclerViewClickListener{
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
@@ -76,7 +79,7 @@ public class MyListsMineFragment extends BaseFragment {
 
         switch (item.getItemId()) {
             case R.id.action_populate_list:
-                adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Delete");
+                adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Delete", this);
                 rcvwSpots.setAdapter(adapter);
                 setEmptyViewVisibility();
                 break;
@@ -99,8 +102,43 @@ public class MyListsMineFragment extends BaseFragment {
         rcvwSpots.hideProgress();
     }
 
+    /**
+     * page 93
+     */
+    private void showUnfollowDialog(String option) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
+        nomwellInfoDialog.setMessage("Are you sure you want to " + option
+                + " this list?");
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setPositive("Yes", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
     @Override
     public String getFragmentTitle(Context context) {
         return context.getString(R.string.mine);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        showUnfollowDialog("Delete");
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
+
     }
 }

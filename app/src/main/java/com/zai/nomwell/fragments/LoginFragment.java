@@ -166,10 +166,13 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         if (mode == LoginActivity.MODE_SINGUP) {
             showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                     && !isEmailEmpty && !isPasswordEmpty);
+            ((LoginActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
         } else {
             showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+            ((LoginActivity) getActivity()).getSupportActionBar().setTitle("Log In");
         }
 
+        btnSignUp.setText(((LoginActivity) getActivity()).getSupportActionBar().getTitle());
         view.findViewById(R.id.llName).setVisibility(mode == LoginActivity.MODE_SINGUP ? View.VISIBLE : View.INVISIBLE);
         txtForgotPassword.setVisibility(mode == LoginActivity.MODE_SINGUP ? View.GONE : View.VISIBLE);
     }

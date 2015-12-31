@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="MultipleSwitch">
+        <attr name="switchBackground" format="color|reference" />
+        <attr name="numOfSwitches" format="integer" />
+        <attr name="switchText" format="string" />
+        <attr name="switchDrawable" format="color|reference" />
+    </declare-styleable>
+</resources>

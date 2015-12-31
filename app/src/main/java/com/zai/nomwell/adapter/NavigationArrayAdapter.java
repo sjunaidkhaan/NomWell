@@ -1,6 +1,8 @@
 package com.zai.nomwell.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
@@ -22,11 +24,14 @@ public class NavigationArrayAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
+        AppCompatTextView text1 = (AppCompatTextView) view.findViewById(android.R.id.text1);
         if (position == 0) {
             Drawable drawable = ContextCompat.getDrawable(parent.getContext(), R.drawable.ic_home);
-//            drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.);
-            AppCompatTextView text1 = (AppCompatTextView) view.findViewById(android.R.id.text1);
+            drawable.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
             text1.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+        }
+        else {
+            text1.setCompoundDrawables(null, null, null, null);
         }
         return view;
     }

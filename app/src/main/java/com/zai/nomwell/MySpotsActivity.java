@@ -3,18 +3,22 @@ package com.zai.nomwell;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.bumptech.glide.Glide;
@@ -31,7 +35,7 @@ import com.zai.nomwell.util.Util;
 import java.util.ArrayList;
 
 public class MySpotsActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener, View.OnClickListener {
 
     private static final String TAG = "MySpotsActivity";
 
@@ -42,6 +46,8 @@ public class MySpotsActivity extends BaseActivity
 
     private NavigationView navigationView;
     private ListView listOptions;
+
+    private View bottomView;
 
     private static final String OPTIONS[] = {"My Spots  ", "My Lists",
             "Explore Friends' Spots", "Switch Cities", "Import an Existing List"};
@@ -77,14 +83,14 @@ public class MySpotsActivity extends BaseActivity
 
         int navigationBarHeight = Util.getNavBarHeight(this);
         Util.log(TAG, "NavigationBar Height: " + navigationBarHeight);
-        if (navigationBarHeight > 0) {
-            View bottomButtons = findViewById(R.id.content);
-            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) bottomButtons.getLayoutParams();
-            params.setMargins(0, 0, 0, navigationBarHeight);
-            int padding = getResources().getDimensionPixelSize(R.dimen.padding);
-            bottomButtons.setPadding(0, 0, 0, padding);
-            bottomButtons.requestLayout();
-        }
+//        if (navigationBarHeight > 0) {
+//            View bottomButtons = findViewById(R.id.content);
+//            CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) bottomButtons.getLayoutParams();
+//            params.setMargins(0, 0, 0, navigationBarHeight);
+//            int padding = getResources().getDimensionPixelSize(R.dimen.padding);
+//            bottomButtons.setPadding(0, 0, 0, padding);
+//            bottomButtons.requestLayout();
+//        }
 
         if (mySpotFragment == null) {
             mySpotFragment = new MySpotFragment();
@@ -95,6 +101,7 @@ public class MySpotsActivity extends BaseActivity
 
         setCurrentFragment(mySpotFragment);
 
+        bottomView = findViewById(R.id.bottomView);
     }
 
     @Override
@@ -112,6 +119,15 @@ public class MySpotsActivity extends BaseActivity
             navigationView.setCheckedItem(R.id.nav_my_lists);
             getSupportActionBar().setTitle("My Lists");
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && bottomView.getVisibility() == View.VISIBLE) {
+            bottomView.setVisibility(View.GONE);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -423,12 +439,63 @@ public class MySpotsActivity extends BaseActivity
             setCurrentFragment(myListsFragment);
             getSupportActionBar().setTitle("My Lists");
         } else if (position == 3) {
-            startActivity(new Intent(this, ChooseCityActivity.class));
+//            startActivity(new Intent(this, ChooseCityActivity.class));
+            showIOSDialog(new String[]{"Settle, WA (0)"});
         } else if (position == 4) {
             showLetsStartedDialog();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    public void showIOSDialog(String topItems[]) {
+        LinearLayout llTopContent = (LinearLayout) findViewById(R.id.llTopContent);
+        llTopContent.removeAllViews();
+
+        for (int i = 0; i < topItems.length; i++) {
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            AppCompatButton button = new AppCompatButton(this);
+            button.setTag(topItems[i]);
+            button.setLayoutParams(params);
+            button.setText(topItems[i]);
+            button.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+            llTopContent.addView(button, i);
+        }
+
+        bottomView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Util.log(TAG, "Clicked");
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content);
+        switch (view.getId()) {
+            case R.id.llShare:
+                if (fragment == mySpotFragment) {
+                    mySpotFragment.showSendToFriendDialog("Test", "Test");
+                } else if (fragment == myListsFragment) {
+                    myListsFragment.showSendToFriendDialog();
+                }
+                break;
+
+            case R.id.llAddSpots:
+                if (fragment == mySpotFragment) {
+                    if (mySpotFragment.rcvwSpots.getAdapter() != null &&
+                            mySpotFragment.rcvwSpots.getAdapter().getItemCount() > 0) {
+                        startActivity(new Intent(this, AddSpotsActivity.class));
+                    } else {
+                        mySpotFragment.showEmptyListDialog();
+                    }
+                } else if (fragment == myListsFragment) {
+                    myListsFragment.showListInputDialog();
+                }
+
+                break;
+
+            case R.id.llAddToLists:
+                break;
+        }
     }
 }

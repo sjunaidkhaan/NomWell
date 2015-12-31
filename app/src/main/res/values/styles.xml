@@ -28,10 +28,12 @@
 
     <style name="ratingBar18" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbars_18</item>
+        <item name="android:stepSize">1</item>
     </style>
 
     <style name="ratingBar24" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbars_24</item>
+        <item name="android:stepSize">1</item>
     </style>
 
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -48,11 +50,17 @@
         <item name="android:padding">@dimen/edittext_padding</item>
     </style>
 
+    <style name="AppTheme.IOSButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/bg_ios_</item>
+        <item name="android:textSize">@dimen/text_size_header_small</item>
+    </style>
+
     <style name="AppTheme.AddSpotTextView">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:padding">@dimen/textview_padding</item>
         <item name="android:drawablePadding">@dimen/textview_padding</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/add_spot_text_color</item>
     </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Borderless">

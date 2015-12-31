@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.AddSpotsActivity;
@@ -45,7 +46,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
     private NomwellHalfClickableTextView layoutSuggestion;
     private NomwellHalfClickableTextView layoutSortBy;
 
-    private SuperRecyclerView rcvwSpots;
+    public SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
     private MySpotsAdapter adapter;
 
@@ -93,10 +94,6 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         layoutSortBy.setNormalText("Sort by:");
         layoutSortBy.setClickableText("Name");
 
-        view.findViewById(R.id.llShare).setOnClickListener(this);
-        view.findViewById(R.id.llAddSpots).setOnClickListener(this);
-        view.findViewById(R.id.llAddToLists).setOnClickListener(this);
-
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
         rcvwSpots = (SuperRecyclerView) view.findViewById(R.id.rcvwSpots);
         rcvwSpots.addItemDecoration(itemDecoration);
@@ -107,23 +104,27 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         rcvwSpots.hideProgress();
 
         setViews();
+
+        view.findViewById(R.id.llShare).setOnClickListener(this);
+        view.findViewById(R.id.llAddSpots).setOnClickListener(this);
+        view.findViewById(R.id.llAddToLists).setOnClickListener(this);
     }
 
 
     private void setViews() {
         if (!dataSet) {
-            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
-            tab1.setText("ALL");
-            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
-            tab2.setImageResource(R.drawable.ic_pin_24);
-            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
-            tab3.setImageResource(R.drawable.ic_done_white_24dp);
-//            tabLayout.addTab(tabLayout.newTab());
-//            tabLayout.addTab(tabLayout.newTab());
-//            tabLayout.addTab(tabLayout.newTab());
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
-            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
+//            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
+//            tab1.setText("ALL");
+//            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
+//            tab2.setImageResource(R.drawable.ic_pin_24);
+//            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
+//            tab3.setImageResource(R.drawable.ic_done_white_24dp);
+            tabLayout.addTab(tabLayout.newTab().setText("ALL"));
+            tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_pin_24));
+            tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_done_white_24dp));
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
+//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
         }
     }
 
@@ -141,19 +142,15 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         public void onTabSelected(TabLayout.Tab tab) {
             switch (tab.getPosition()) {
                 case 0:
-                    tab1.setSelected(true);
-                    tab2.setSelected(false);
-                    tab3.setSelected(false);
+//                    tab1.setSelected(true);
+//                    tab2.setSelected(false);
+//                    tab3.setSelected(false);
                     break;
                 case 1:
-                    tab1.setSelected(false);
-                    tab2.setSelected(true);
-                    tab3.setSelected(false);
+
                     break;
                 case 2:
-                    tab1.setSelected(false);
-                    tab2.setSelected(false);
-                    tab3.setSelected(true);
+
                     break;
             }
         }
@@ -181,8 +178,14 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 Intent map = new Intent(getActivity(), TabbedMapActivity.class);
                 startActivity(map);
                 break;
-            case R.id.populateData:
-                adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), this);
+            case R.id.action_populate_list:
+                adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), false, this);
+                rcvwSpots.setAdapter(adapter);
+                setEmptyViewVisibility();
+                break;
+
+            case R.id.action_populate_list_with_check:
+                adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), true, this);
                 rcvwSpots.setAdapter(adapter);
                 setEmptyViewVisibility();
                 break;
@@ -207,7 +210,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         }
     }
 
-    private void showEmptyListDialog() {
+    public void showEmptyListDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
         nomwellListDialog.setMessage(getContext().getString(R.string.must_add_places));
@@ -224,28 +227,10 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         dialog.show();
     }
 
-    /**
-     * page 93
-     */
-    private void showUnfollowDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
-        nomwellInfoDialog.setMessage("Are you sure you want to unfollow this list?");
-        builder.setView(nomwellInfoDialog.getView());
-        final AlertDialog dialog = builder.create();
-        nomwellInfoDialog.setPositive("Yes", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        adapter = null;
     }
 
     @Override
@@ -253,10 +238,12 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         Util.log(TAG, "Clicked");
         switch (view.getId()) {
             case R.id.llShare:
+                showSendToFriendDialog("Test", "Test");
                 break;
 
             case R.id.llAddSpots:
-                if (rcvwSpots != null && rcvwSpots.getAdapter().getItemCount() > 0) {
+                if (rcvwSpots.getAdapter() != null &&
+                        rcvwSpots.getAdapter().getItemCount() > 0) {
                     startActivity(new Intent(getActivity(), AddSpotsActivity.class));
                 } else {
                     showEmptyListDialog();
@@ -275,6 +262,9 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 break;
             case R.id.imvwGone:
                 showStarsDialog();
+                break;
+            case R.id.imvwCheck:
+                ((ImageView) view).setImageResource(R.drawable.ic_sendmode_checked_24);
                 break;
         }
     }
@@ -328,7 +318,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
     /**
      * page 109
      */
-    private void showSendToFriendDialog(String spotName, String option) {
+    public void showSendToFriendDialog(String spotName, String option) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Save all these places to " + spotName);
         NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(getContext());
@@ -339,6 +329,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                showInfoDialog("Spots Sent");
             }
         });
         nomwellInfoDialog.setNegative("Cancel", new View.OnClickListener() {

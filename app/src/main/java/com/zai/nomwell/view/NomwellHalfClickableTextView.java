@@ -45,5 +45,9 @@ public class NomwellHalfClickableTextView {
         return txtClickableText.getText().toString();
     }
 
+    public void addClickListener(View.OnClickListener clickListener) {
+        txtClickableText.setOnClickListener(clickListener);
+    }
+
 
 }

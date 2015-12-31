@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.swipe.BaseSwipeAdapter;
 import com.zai.nomwell.R;
 import com.zai.nomwell.adapter.holder.MyListsHolder;
+import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MyListsData;
 
 import java.util.ArrayList;
@@ -18,17 +19,19 @@ public class MyListsAdapter extends BaseSwipeAdapter<MyListsHolder> {
 
     private ArrayList<MyListsData> myListData;
     private String swipeButtonText = "Delete";
+    private OnRecyclerViewClickListener listener;
 
-    public MyListsAdapter(ArrayList<MyListsData> mySpotsData, String swipeButtonText) {
+    public MyListsAdapter(ArrayList<MyListsData> mySpotsData, String swipeButtonText, OnRecyclerViewClickListener listener) {
         this.myListData = mySpotsData;
         this.swipeButtonText = swipeButtonText;
+        this.listener = listener;
     }
 
     @Override
     public MyListsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MyListsHolder(
                 LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_all_lists, null), swipeButtonText);
+                        .inflate(R.layout.list_all_lists, null), swipeButtonText, listener);
     }
 
     @Override

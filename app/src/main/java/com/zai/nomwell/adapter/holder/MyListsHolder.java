@@ -13,7 +13,7 @@ import com.zai.nomwell.util.Util;
 /**
  * Created by chitta on 12/8/15.
  */
-public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
+public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
     public AppCompatTextView lblDelete;
     public ImageView imvwIcon;
@@ -21,11 +21,16 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
     public AppCompatTextView txtInfo;
     private LinearLayout llSwipeContent;
 
-    public MyListsHolder(View itemView, String swipeButtonText) {
+    private OnRecyclerViewClickListener listener;
+
+    public MyListsHolder(View itemView, String swipeButtonText, OnRecyclerViewClickListener listener) {
         super(itemView);
+
+        this.listener = listener;
 
         lblDelete = (AppCompatTextView) itemView.findViewById(R.id.lblDelete);
         lblDelete.setText(swipeButtonText);
+        lblDelete.setOnClickListener(this);
 
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
@@ -35,5 +40,20 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder {
         int totalWidth = Util.getScreenWidth(itemView.getContext());
         SwipeLayout.LayoutParams params = (SwipeLayout.LayoutParams) llSwipeContent.getLayoutParams();
         params.width = totalWidth / 3;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (listener != null) {
+            listener.onItemClick(view, getAdapterPosition());
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        if (listener != null) {
+            listener.onItemLongClick(view, getAdapterPosition());
+        }
+        return false;
     }
 }

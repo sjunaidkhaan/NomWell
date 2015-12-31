@@ -60,7 +60,7 @@ public class MySpotAllFragment extends BaseFragment implements OnRecyclerViewCli
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         rcvwSpots.setLayoutManager(layoutManager);
 
-        adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), this);
+        adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), false, this);
         rcvwSpots.setAdapter(adapter);
     }
 

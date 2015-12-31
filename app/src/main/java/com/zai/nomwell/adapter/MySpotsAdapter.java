@@ -21,16 +21,18 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
     private ArrayList<MySpotsData> mySpotsData;
 
     private OnRecyclerViewClickListener clickListener;
+    private boolean showCheck;
 
-    public MySpotsAdapter(ArrayList<MySpotsData> mySpotsData, OnRecyclerViewClickListener clickListener) {
+    public MySpotsAdapter(ArrayList<MySpotsData> mySpotsData, boolean showCheck, OnRecyclerViewClickListener clickListener) {
         this.clickListener = clickListener;
         this.mySpotsData = mySpotsData;
+        this.showCheck = showCheck;
     }
 
     @Override
     public MySpotsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new MySpotsHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_all_spot, null), clickListener);
+                .inflate(R.layout.list_all_spot, null), showCheck, clickListener);
     }
 
     @Override
@@ -51,7 +53,7 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
         holder.imvwIcon.setImageResource(icon);
         holder.imvwIcon.setColorFilter(
                 ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimary));
-        holder.ratingBar.setNumStars(msd.rating);
+        holder.ratingBar.setProgress(msd.rating);
         if (msd.status == MySpotsData.STATUS_GONE) {
             holder.ratingBar.setVisibility(View.VISIBLE);
         } else {

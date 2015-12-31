@@ -39,4 +39,14 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <RelativeLayout
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semi_transparent"
+        android:visibility="gone">
+
+        <include layout="@layout/fragment_iosdialog" />
+    </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -25,10 +25,10 @@
     <string name="visited">Visited</string>
     <string name="pinned">Pinned</string>
     <string name="now_lets_get_started">Now let\'s get started</string>
-    <string name="lets_get_started_message">Do you have an existing restaurant list (like notes app or spreadsheet) that you want to import?</string>
+    <string name="lets_get_started_message">Do you have an existing restaurant list (like notes app or spreadsheet) that you want imported?</string>
     <string name="fantastic_">Fantastic!</string>
-    <string name="where_is_your_list_located_">We\'ll send you an email with instructions on how to finish the import process from your computer. (It\'s super easy.)</string>
-    <string name="confirm_email_address">Coolio. Please confirm your email address</string>
+    <string name="where_is_your_list_located_">We\'ll send you an email with instructions on how to finish the import process from your computer.\n(It\'s super easy.)</string>
+    <string name="confirm_email_address">Coolio. Please confirm your email address.</string>
     <string name="enter_email_address">Enter email address</string>
 
     <string-array name="lets_started_options">
@@ -54,7 +54,7 @@
         When a friend sends you a list, you can access it here and see any future changes to it.\n\n
         If you have friends using Nomwell, go ask them to share a lists!</string>
     <string name="choose_your_city_empty_text">
-        Nomwell organizes your spots by city.\n
+        Nomwell organizes your spots by city.\n\n
         Choose the first city for which you want to keep track of restaurants.\n
     (This is usually the city you live in near.)</string>
      <string name="my_lists_spot_recs_empty_text">
