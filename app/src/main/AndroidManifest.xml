@@ -82,8 +82,16 @@
         <activity
             android:name=".AddTagActivity"
             android:label="@string/title_activity_add_tag"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-        <activity android:name=".TranslucentActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TranslucentActivity" />
+        <activity
+            android:name=".SelectSpotActivity"
+            android:label="@string/title_activity_select_spot"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SelectListActivity"
+            android:label="@string/title_activity_select_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

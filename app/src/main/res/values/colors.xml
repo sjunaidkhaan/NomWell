@@ -14,11 +14,13 @@
 
     <color name="selected_indicator">#C3D9FA</color>
 
-    <color name="app_back_color">#DEE2E5</color>
+    <color name="app_back_color">#EEF2F4</color>
     <color name="badge_color">#678EF7</color>
     <color name="ios_button_color">#FCFCFC</color>
 
     <color name="semi_transparent">#6c000000</color>
 
     <color name="add_spot_text_color">#616161</color>
+
+    <color name="select_spot_blue_color">#B3C6FB</color>
 </resources>

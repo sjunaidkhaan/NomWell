@@ -194,4 +194,9 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private void showHideSignUp(boolean show) {
         btnSignUp.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return 0;
+    }
 }

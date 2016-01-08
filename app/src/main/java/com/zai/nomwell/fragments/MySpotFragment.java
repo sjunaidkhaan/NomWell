@@ -23,15 +23,18 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.AddSpotsActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.SelectSpotActivity;
 import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MySpotsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
+import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.dialog.NomwellStarsDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
+import com.zai.nomwell.view.NomwellSearchView;
 import com.zai.nomwell.view.NomwellTab;
 
 /**
@@ -57,6 +60,8 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
     private NomwellTab tab1;
     private NomwellTab tab2;
     private NomwellTab tab3;
+
+    private NomwellSearchView searchView;
 
 
     public MySpotFragment() {
@@ -103,6 +108,8 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
 
         rcvwSpots.hideProgress();
 
+        searchView = new NomwellSearchView(view.findViewById(R.id.layoutSearch));
+
         setViews();
 
         view.findViewById(R.id.llShare).setOnClickListener(this);
@@ -142,17 +149,18 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         public void onTabSelected(TabLayout.Tab tab) {
             switch (tab.getPosition()) {
                 case 0:
-//                    tab1.setSelected(true);
-//                    tab2.setSelected(false);
-//                    tab3.setSelected(false);
+                    adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), false, MySpotFragment.this);
                     break;
                 case 1:
-
+                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, MySpotFragment.this);
                     break;
                 case 2:
-
+                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE), false, MySpotFragment.this);
                     break;
             }
+//            rcvwSpots.setAdapter(adapter);
+            adapter = null;
+            setEmptyViewVisibility();
         }
 
         @Override
@@ -182,12 +190,16 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), false, this);
                 rcvwSpots.setAdapter(adapter);
                 setEmptyViewVisibility();
+                getView().findViewById(R.id.llBottomButtons).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.layoutSearch).setVisibility(View.VISIBLE);
                 break;
 
             case R.id.action_populate_list_with_check:
                 adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), true, this);
                 rcvwSpots.setAdapter(adapter);
                 setEmptyViewVisibility();
+                getView().findViewById(R.id.llBottomButtons).setVisibility(View.GONE);
+                getView().findViewById(R.id.layoutSearch).setVisibility(View.GONE);
                 break;
         }
 
@@ -238,8 +250,17 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         Util.log(TAG, "Clicked");
         switch (view.getId()) {
             case R.id.llShare:
-                showSendToFriendDialog("Test", "Test");
+                if (rcvwSpots.getAdapter() != null &&
+                        rcvwSpots.getAdapter().getItemCount() > 0) {
+                    Intent intent = new Intent(getActivity(), SelectSpotActivity.class);
+                    intent.putExtra(SelectSpotActivity.EXTRA_TITLE, "Select Spot");
+                    intent.putExtra(SelectSpotActivity.EXTRA_SHOW_BOTTOM_BUTTONS, false);
+                    startActivity(intent);
+                } else {
+                    showInfoDialog("You must add places to My Spots before using this features!");
+                }
                 break;
+
 
             case R.id.llAddSpots:
                 if (rcvwSpots.getAdapter() != null &&
@@ -264,7 +285,17 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 showStarsDialog();
                 break;
             case R.id.imvwCheck:
-                ((ImageView) view).setImageResource(R.drawable.ic_sendmode_checked_24);
+                boolean checked = false;
+                if(view.getTag() != null){
+                    checked = (boolean) view.getTag();
+                }
+                if (checked) {
+                    ((ImageView) view).setImageResource(R.drawable.ic_sendmode_unchecked_24);
+                    view.setTag(false);
+                } else {
+                    ((ImageView) view).setImageResource(R.drawable.ic_sendmode_checked_24);
+                    view.setTag(true);
+                }
                 break;
         }
     }

@@ -4,6 +4,13 @@
     tools:context="com.zai.nomwell.AddSpotsActivity">
 
     <item
+        android:id="@+id/action_map"
+        android:icon="@drawable/ic_map_white_24dp"
+        android:orderInCategory="100"
+        android:title="Map"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/action_populate_list"
         android:orderInCategory="100"
         android:title="Populate Data"

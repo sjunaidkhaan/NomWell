@@ -1,1 +1,1 @@
-include ':app', ':bottomsheet', ':bottomsheetcommons'
+include ':app', ':tagview'

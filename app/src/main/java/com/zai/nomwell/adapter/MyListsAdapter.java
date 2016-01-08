@@ -47,6 +47,10 @@ public class MyListsAdapter extends BaseSwipeAdapter<MyListsHolder> {
 
     }
 
+    public String getTitle(int position) {
+        return myListData.get(position).header;
+    }
+
     @Override
     public int getItemCount() {
         return myListData.size();

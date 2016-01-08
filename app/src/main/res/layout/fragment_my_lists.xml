@@ -8,40 +8,6 @@
     android:fitsSystemWindows="true"
     tools:context="com.zai.nomwell.MySpotsActivity">
 
-    <!--<LinearLayout-->
-    <!--android:id="@+id/llTabs"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="@dimen/tab_height"-->
-    <!--android:background="@color/colorPrimary"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:weightSum="3">-->
-
-    <!--<include-->
-    <!--android:id="@+id/tabAll"-->
-    <!--layout="@layout/tab"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_weight="1" />-->
-
-    <!--<include-->
-    <!--android:id="@+id/tabPinned"-->
-    <!--layout="@layout/tab"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_weight="1" />-->
-
-    <!--<include-->
-    <!--android:id="@+id/tabVisited"-->
-    <!--layout="@layout/tab"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_gravity="center_vertical"-->
-    <!--android:layout_weight="1" />-->
-
-    <!--</LinearLayout>-->
-
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"

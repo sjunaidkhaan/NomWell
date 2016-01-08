@@ -5,22 +5,18 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
 import com.zai.nomwell.adapter.NavigationArrayAdapter;
 import com.zai.nomwell.db.MyListsData;
@@ -46,8 +42,6 @@ public class MySpotsActivity extends BaseActivity
 
     private NavigationView navigationView;
     private ListView listOptions;
-
-    private View bottomView;
 
     private static final String OPTIONS[] = {"My Spots  ", "My Lists",
             "Explore Friends' Spots", "Switch Cities", "Import an Existing List"};
@@ -101,7 +95,6 @@ public class MySpotsActivity extends BaseActivity
 
         setCurrentFragment(mySpotFragment);
 
-        bottomView = findViewById(R.id.bottomView);
     }
 
     @Override
@@ -119,15 +112,6 @@ public class MySpotsActivity extends BaseActivity
             navigationView.setCheckedItem(R.id.nav_my_lists);
             getSupportActionBar().setTitle("My Lists");
         }
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && bottomView.getVisibility() == View.VISIBLE) {
-            bottomView.setVisibility(View.GONE);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     @Override
@@ -430,6 +414,8 @@ public class MySpotsActivity extends BaseActivity
         }
     }
 
+    private String[] SHEETITEMS = new String[]{"Settle, WA (0)", "Add City"};
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         if (position == 0) {
@@ -440,7 +426,23 @@ public class MySpotsActivity extends BaseActivity
             getSupportActionBar().setTitle("My Lists");
         } else if (position == 3) {
 //            startActivity(new Intent(this, ChooseCityActivity.class));
-            showIOSDialog(new String[]{"Settle, WA (0)"});
+            showIOSDialog(SHEETITEMS, new ActionSheet.ActionSheetListener() {
+                @Override
+                public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
+
+                }
+
+                @Override
+                public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+                    if (index >= SHEETITEMS.length - 1) {
+                        Intent intent = new Intent(getBaseContext(), ChooseCityActivity.class);
+                        intent.putExtra(ChooseCityActivity.EXTRA_TITLE, "Add City");
+                        startActivity(intent);
+                    } else {
+
+                    }
+                }
+            });
         } else if (position == 4) {
             showLetsStartedDialog();
         }
@@ -449,22 +451,12 @@ public class MySpotsActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    public void showIOSDialog(String topItems[]) {
-        LinearLayout llTopContent = (LinearLayout) findViewById(R.id.llTopContent);
-        llTopContent.removeAllViews();
-
-        for (int i = 0; i < topItems.length; i++) {
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            AppCompatButton button = new AppCompatButton(this);
-            button.setTag(topItems[i]);
-            button.setLayoutParams(params);
-            button.setText(topItems[i]);
-            button.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-            llTopContent.addView(button, i);
-        }
-
-        bottomView.setVisibility(View.VISIBLE);
+    public void showIOSDialog(String topItems[], ActionSheet.ActionSheetListener listener) {
+        ActionSheet.createBuilder(this, getSupportFragmentManager())
+                .setCancelButtonTitle("Cancel")
+                .setOtherButtonTitles(topItems)
+                .setCancelableOnTouchOutside(true)
+                .setListener(listener).show();
     }
 
     @Override

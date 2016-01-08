@@ -28,12 +28,16 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
 
         this.listener = listener;
 
+        itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
+
         lblDelete = (AppCompatTextView) itemView.findViewById(R.id.lblDelete);
         lblDelete.setText(swipeButtonText);
         lblDelete.setOnClickListener(this);
 
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
+        txtHeader.setOnClickListener(this);
         txtInfo = (AppCompatTextView) itemView.findViewById(R.id.txtInfo);
 
         llSwipeContent = (LinearLayout) itemView.findViewById(R.id.llSwipeContent);

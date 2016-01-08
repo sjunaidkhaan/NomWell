@@ -19,10 +19,98 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
-    <android.support.v7.widget.ListViewCompat
-        android:id="@+id/listTags"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:id="@+id/rlContent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_below="@id/rlSearch" />
+        android:layout_below="@id/rlSearch"
+        android:background="@color/white">
 
+        <RelativeLayout
+            android:id="@+id/rlTagged"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_med">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblTagged"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Tagged: " />
+
+            <com.ns.developer.tagview.widget.TagCloudLinkView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/chipViewTagged"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/lblTagged"
+                android:background="@android:color/transparent"
+                android:inputType="textEmailAddress"
+                app:isDeletable="true"
+                app:tagLayoutColor="@color/colorPrimary"
+                app:tagTextColor="@color/white"
+                app:deletableTextColor="@color/white"
+                android:padding="@dimen/edittext_padding" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlAll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlTagged"
+            android:padding="@dimen/padding_med">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="All: " />
+
+            <com.ns.developer.tagview.widget.TagCloudLinkView
+                android:id="@+id/chipViewAll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/lblAll"
+                android:background="@android:color/transparent"
+                android:inputType="textEmailAddress"
+
+                android:padding="@dimen/edittext_padding" />
+        </RelativeLayout>
+
+        <!--chip:chip_background="@color/colorPrimary"-->
+        <!--chip:chip_background_selected="@color/colorPrimaryDark"-->
+        <!--chip:chip_corner_radius="6dp"-->
+        <!--chip:chip_line_spacing="20dp"-->
+        <!--chip:chip_padding="10dp"-->
+        <!--chip:chip_side_padding="10dp"-->
+        <!--chip:chip_spacing="16dp"-->
+
+        <LinearLayout
+            android:id="@+id/llNotInYourTags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rlAll"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblNonInYourTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Not in your tags? " />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtAddIt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:text="Add it" />
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

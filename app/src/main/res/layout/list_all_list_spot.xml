@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.malinskiy.superrecyclerview.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/recyclerview_swipe"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:drag_edge="left"
+    app:leftEdgeSwipeOffset="200dp"
+    app:show_mode="pull_out">
+
+    <LinearLayout
+        android:id="@+id/llSwipeContent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlMainContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/imvwIcon"
+            android:layout_width="@dimen/list_icon_size"
+            android:layout_height="@dimen/list_icon_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginRight="@dimen/margin_large"
+            android:src="@drawable/ic_search_black_24dp" />
+
+        <ImageView
+            android:id="@+id/imvwCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/margin_med"
+            android:layout_marginRight="@dimen/margin_med"
+            android:src="@drawable/ic_sendmode_unchecked_24" />
+
+        <RelativeLayout
+            android:id="@+id/rlContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imvwIcon"
+            android:padding="@dimen/padding_med">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Header"
+                android:textSize="@dimen/text_size_header" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                android:id="@+id/ratingBar"
+                style="@style/ratingBar18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/txtSubInfo"
+                android:layout_below="@+id/txtHeader"
+                android:layout_marginRight="@dimen/margin"
+                android:foregroundTint="@color/colorPrimaryDark" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHeader"
+                android:layout_toRightOf="@id/ratingBar"
+                android:text="info" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtSubInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtInfo"
+                android:text="info" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</com.malinskiy.superrecyclerview.swipe.SwipeLayout>

@@ -3,9 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bottomsheet/bottomsheet.iml" filepath="$PROJECT_DIR$/bottomsheet/bottomsheet.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bottomsheetcommons/bottomsheetcommons.iml" filepath="$PROJECT_DIR$/bottomsheetcommons/bottomsheetcommons.iml" />
       <module fileurl="file://$PROJECT_DIR$/nomwell.iml" filepath="$PROJECT_DIR$/nomwell.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tagview/tagview.iml" filepath="$PROJECT_DIR$/tagview/tagview.iml" />
     </modules>
   </component>
 </project>

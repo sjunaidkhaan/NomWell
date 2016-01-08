@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_back_color"
+    android:padding="@dimen/padding_large"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlImages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imvwLeft"
+            android:layout_width="@dimen/list_icon_size"
+            android:layout_height="@dimen/list_icon_size"
+            android:src="@drawable/ic_bottom_bar_pin_places_near_me" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imvwRight"
+            android:layout_width="@dimen/list_icon_size"
+            android:layout_height="@dimen/list_icon_size"
+            android:layout_toRightOf="@id/imvwLeft"
+            android:src="@drawable/ic_bottom_bar_gone_places_near_me" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_med"
+        android:layout_toRightOf="@id/rlImages"
+        android:text="Naf Naf Grill\n$ - Middle Eastern" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txtIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_med"
+        android:text=">"
+        android:textStyle="bold" />
+</RelativeLayout>

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.baoyz.actionsheet.ActionSheet;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
@@ -23,7 +24,6 @@ import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
-import com.zai.nomwell.view.NomwellTab;
 
 import java.util.ArrayList;
 
@@ -55,10 +55,6 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
     private NomwellHalfClickableTextView halfClickableTextView;
 
     private boolean dateSet = false;
-
-    private NomwellTab tab1;
-    private NomwellTab tab2;
-    private NomwellTab tab3;
 
     public MyListsFragment() {
         // Required empty public constructor
@@ -128,19 +124,11 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
     private void updateTabs(int position) {
         switch (position) {
             case 0:
-//                tab1.setSelected(true);
-//                tab2.setSelected(false);
-//                tab3.setSelected(false);
+
                 break;
             case 1:
-//                tab1.setSelected(false);
-//                tab2.setSelected(true);
-//                tab3.setSelected(false);
                 break;
             case 2:
-//                tab1.setSelected(false);
-//                tab2.setSelected(false);
-//                tab3.setSelected(true);
                 break;
         }
     }
@@ -149,19 +137,6 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         if (!dateSet) {
             mViewPager.setAdapter(mSectionsPagerAdapter);
             tabLayout.setupWithViewPager(mViewPager);
-
-//            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
-//            tab1.setText("MINE");
-//            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
-//            tab2.setText("FOLLOWING");
-//            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
-//            tab3.setText("SPOT RECS");
-////            tabLayout.addTab(tabLayout.newTab());
-////            tabLayout.addTab(tabLayout.newTab());
-////            tabLayout.addTab(tabLayout.newTab());
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
         }
     }
 
@@ -211,13 +186,21 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         dialog.show();
     }
 
+    private String OPTIONS[] = new String[]{"Chicago, IL (46)", "Nashville, TN (9)", "San Francisco, CA (15)"
+            , "Settle, WA(25)", "Add City"};
+
 
     @Override
     public void onClick(View view) {
         Util.log(TAG, "Clicked");
         switch (view.getId()) {
             case R.id.llShare:
-                showSendToFriendDialog();
+                BaseFragment fragment = (BaseFragment) mSectionsPagerAdapter.getItem(mViewPager.getCurrentItem());
+                if (fragment.getAdapterTotal() > 0) {
+                    showSendToFriendDialog();
+                } else {
+                    showInfoDialog("You must have list before using this feature!");
+                }
                 break;
 
             case R.id.llCreateLists:
@@ -226,8 +209,21 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
 
             case R.id.txtClickable:
                 MySpotsActivity msa = (MySpotsActivity) getActivity();
-                msa.showIOSDialog(new String[]{"Chicago, IL (46)", "Nashville, TN (9)", "San Francisco, CA (15)"
-                , "Settle, WA(25)"});
+                msa.showIOSDialog(OPTIONS, new ActionSheet.ActionSheetListener() {
+                    @Override
+                    public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
+
+                    }
+
+                    @Override
+                    public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+                        if (index >= OPTIONS.length - 1) {
+
+                        } else {
+                            halfClickableTextView.setClickableText(OPTIONS[index]);
+                        }
+                    }
+                });
                 break;
         }
     }

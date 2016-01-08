@@ -49,5 +49,11 @@ public class NomwellHalfClickableTextView {
         txtClickableText.setOnClickListener(clickListener);
     }
 
+    public void setBackgroundColor(int resid) {
+        view.setBackgroundResource(resid);
+        txtNormalText.setBackgroundColor(resid);
+        txtClickableText.setBackgroundColor(resid);
+    }
+
 
 }

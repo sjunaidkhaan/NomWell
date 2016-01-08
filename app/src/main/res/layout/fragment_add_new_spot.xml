@@ -87,16 +87,16 @@
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/imvwMap"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_centerInParent="true" />
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/imvwTag"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_map_gone"
-                            android:layout_centerInParent="true" />
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_map_gone" />
                     </RelativeLayout>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -229,32 +229,15 @@
             android:layout_alignParentLeft="true"
             android:background="@color/app_back_color"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large">
 
-            <LinearLayout
-                android:id="@+id/llShare"
+            <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/app_back_color"
-                    android:src="@drawable/ic_share" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/app_back_color"
-                    android:text="Share" />
-            </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:background="@color/app_back_color"
+                android:src="@drawable/ic_bottom_bar_share" />
         </LinearLayout>
 
         <LinearLayout
@@ -264,93 +247,52 @@
             android:layout_alignParentRight="true"
             android:background="@color/app_back_color"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large">
 
-            <LinearLayout
-                android:id="@+id/llDelete"
+
+            <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/app_back_color"
-                    android:src="@drawable/ic_delete" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@color/app_back_color"
-                    android:text="Delete" />
-            </LinearLayout>
+                android:layout_gravity="center_horizontal"
+                android:background="@color/app_back_color"
+                android:src="@drawable/ic_bottom_bar_delete" />
 
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/llContWantToGo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_large"
-            android:layout_marginRight="@dimen/margin_large"
             android:layout_toLeftOf="@+id/llContDelete"
             android:layout_toRightOf="@id/llContShare"
-            android:background="@drawable/bg_add_spot_bottom_button"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/padding_large"
             android:paddingRight="@dimen/padding_large">
 
-            <View
-                android:id="@+id/vwCenter"
-                android:layout_width="@dimen/stroke_width"
-                android:layout_height="@dimen/stroke_width"
-                android:layout_centerInParent="true" />
-
-            <ImageView
-                android:id="@+id/imvwWantToGoIcon"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imvwWantToGo"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/vwCenter"
-                android:background="@color/app_back_color"
-                android:src="@drawable/ic_pin_24" />
+                android:clickable="true"
+                android:src="@drawable/add_spots_want_to_go" />
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/txtWantToGo"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imvwGone"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/txtGone"
-                android:layout_below="@id/imvwWantToGoIcon"
-                android:layout_marginTop="@dimen/margin"
-                android:layout_toLeftOf="@id/vwCenter"
-                android:background="@color/app_back_color"
-                android:gravity="center_horizontal"
-                android:text="Want To Go" />
+                android:clickable="true"
+                android:src="@drawable/add_spots_gone" />
 
-            <ImageView
-                android:id="@+id/imvwGoneIcon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toRightOf="@id/vwCenter"
-                android:background="@color/app_back_color"
-                android:src="@drawable/ic_done_white_36dp" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/txtGone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imvwGoneIcon"
-                android:layout_toRightOf="@id/vwCenter"
-                android:background="@color/app_back_color"
-                android:gravity="center_horizontal"
-                android:text="Gone" />
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
+
+    <View
+        android:id="@+id/vwSeparator1"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/stroke_width"
+        android:layout_above="@id/llBottomButtons"
+        android:background="#000000" />
 
 </RelativeLayout>

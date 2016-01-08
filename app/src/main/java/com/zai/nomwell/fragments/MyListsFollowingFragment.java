@@ -2,6 +2,7 @@ package com.zai.nomwell.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.SelectListActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MyListsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
@@ -108,11 +110,22 @@ public class MyListsFollowingFragment extends BaseFragment implements OnRecycler
     }
 
     @Override
+    public int getAdapterTotal() {
+        return adapter != null ? adapter.getItemCount() : 0;
+    }
+
+    @Override
     public void onItemClick(View view, int position) {
         switch (view.getId()) {
             case R.id.lblDelete:
                 showUnfollowDialog("Unfollow");
                 break;
+            default: {
+                Intent intent = new Intent(getActivity(), SelectListActivity.class);
+                intent.putExtra(SelectListActivity.EXTRA_TITLE, adapter.getTitle(position));
+                startActivity(intent);
+            }
+            break;
         }
     }
 

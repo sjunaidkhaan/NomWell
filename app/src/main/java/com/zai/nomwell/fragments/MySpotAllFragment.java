@@ -110,4 +110,9 @@ public class MySpotAllFragment extends BaseFragment implements OnRecyclerViewCli
     public String getFragmentTitle(Context context) {
         return context.getString(R.string.all);
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return adapter != null ? adapter.getItemCount() : 0;
+    }
 }

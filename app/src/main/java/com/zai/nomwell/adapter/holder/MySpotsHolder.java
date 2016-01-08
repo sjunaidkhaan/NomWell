@@ -33,6 +33,8 @@ public class MySpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
 
         this.clickListener = clickListener;
 
+        itemView.setOnClickListener(this);
+
         imvwWanToGo = (ImageView) itemView.findViewById(R.id.imvwWantToGo);
         imvwWanToGo.setOnClickListener(this);
         imvwGone = (ImageView) itemView.findViewById(R.id.imvwGone);

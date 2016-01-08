@@ -14,7 +14,14 @@ public class ChooseCityActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (getIntent().getExtras() != null && getIntent().getExtras().containsKey(EXTRA_TITLE)) {
+            String title = getIntent().getExtras().getString(EXTRA_TITLE);
+            getSupportActionBar().setTitle(title);
+        }
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
 }

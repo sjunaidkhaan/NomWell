@@ -85,4 +85,8 @@
     <string name="title_activity_add_new_spot">Add New Spot</string>
     <string name="title_activity_add_tag">AddTagActivity</string>
     <string name="last_step_desc">To connect you with friends in your contacts, please enter your phone number for matching purposes.\n(It won\'t be used for anything else)</string>
+    <string name="save">Save</string>
+    <string name="title_activity_select_spot">Select Spot</string>
+    <string name="select">select</string>
+    <string name="title_activity_select_list">Select List</string>
 </resources>

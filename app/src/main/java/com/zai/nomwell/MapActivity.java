@@ -3,6 +3,7 @@ package com.zai.nomwell;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,12 +19,20 @@ import java.util.ArrayList;
 public class MapActivity extends BaseActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     public static final String EXTRA_TITLE = "title";
+    public static final String EXTRA_LATITUDE = "latitude";
+    public static final String EXTRA_LONGITUDE = "latitude";
+
 
     private GoogleMap mMap;
 
     private Marker prevMarker = null;
 
+    private double latitude = 0;
+    private double longitude = 0;
+
     private Snackbar snackbar;
+
+    private View layoutBottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +46,22 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
         Bundle extra = getIntent().getExtras();
         if (extra != null && extra.containsKey(EXTRA_TITLE)) {
             getSupportActionBar().setTitle(extra.getString(EXTRA_TITLE));
+            if(extra.containsKey(EXTRA_LATITUDE)) {
+                latitude = extra.getDouble(EXTRA_LATITUDE);
+            }
+
+            if(extra.containsKey(EXTRA_LONGITUDE)) {
+                longitude = extra.getDouble(EXTRA_LONGITUDE);
+            }
         }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        layoutBottom = findViewById(R.id.layoutBottom);
+        layoutBottom.setVisibility(View.GONE);
     }
 
 
@@ -59,7 +78,14 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setOnMarkerClickListener(this);
-        setMarkers();
+        if(latitude < 1 && longitude < 1) {
+            setMarkers();
+        }
+        else {
+            mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(latitude, longitude))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_gone)));
+        }
     }
 
     private void setMarkers() {
@@ -83,6 +109,7 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
         }
         marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_none_selected));
         prevMarker = marker;
+        layoutBottom.setVisibility(View.VISIBLE);
         return false;
     }
 

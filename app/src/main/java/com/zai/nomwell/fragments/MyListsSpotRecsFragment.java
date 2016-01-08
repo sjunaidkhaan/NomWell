@@ -140,4 +140,9 @@ public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerV
     public void onItemLongClick(View view, int position) {
 
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return adapter != null ? adapter.getItemCount() : 0;
+    }
 }

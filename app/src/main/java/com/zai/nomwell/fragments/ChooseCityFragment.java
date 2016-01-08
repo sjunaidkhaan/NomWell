@@ -90,4 +90,9 @@ public class ChooseCityFragment extends BaseFragment implements AdapterView.OnIt
             emptyView.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return 0;
+    }
 }

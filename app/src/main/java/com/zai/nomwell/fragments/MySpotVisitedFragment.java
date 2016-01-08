@@ -67,4 +67,9 @@ public class MySpotVisitedFragment extends BaseFragment {
     public String getFragmentTitle(Context context) {
         return "";
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return adapter != null ? adapter.getItemCount() : 0;
+    }
 }

@@ -141,4 +141,9 @@ public class MyListsMineFragment extends BaseFragment implements OnRecyclerViewC
     public void onItemLongClick(View view, int position) {
 
     }
+
+    @Override
+    public int getAdapterTotal() {
+        return adapter != null ? adapter.getItemCount() : 0;
+    }
 }
