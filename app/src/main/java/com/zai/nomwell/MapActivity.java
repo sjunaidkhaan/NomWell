@@ -1,7 +1,10 @@
 package com.zai.nomwell;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -46,11 +49,11 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
         Bundle extra = getIntent().getExtras();
         if (extra != null && extra.containsKey(EXTRA_TITLE)) {
             getSupportActionBar().setTitle(extra.getString(EXTRA_TITLE));
-            if(extra.containsKey(EXTRA_LATITUDE)) {
+            if (extra.containsKey(EXTRA_LATITUDE)) {
                 latitude = extra.getDouble(EXTRA_LATITUDE);
             }
 
-            if(extra.containsKey(EXTRA_LONGITUDE)) {
+            if (extra.containsKey(EXTRA_LONGITUDE)) {
                 longitude = extra.getDouble(EXTRA_LONGITUDE);
             }
         }
@@ -77,6 +80,9 @@ public class MapActivity extends BaseActivity implements OnMapReadyCallback, Goo
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
         mMap.setOnMarkerClickListener(this);
         if(latitude < 1 && longitude < 1) {
             setMarkers();

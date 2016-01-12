@@ -59,4 +59,8 @@ public class ListSpotAdapter extends BaseSwipeAdapter<ListSpotsHolder> {
     public int getItemCount() {
         return mySpotsData.size();
     }
+
+    public MySpotsData getItemAt(int position) {
+        return mySpotsData.get(position);
+    }
 }

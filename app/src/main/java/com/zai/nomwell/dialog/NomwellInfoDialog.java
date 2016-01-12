@@ -15,7 +15,7 @@ public class NomwellInfoDialog {
 
     private View view;
 
-    private String message;
+    private CharSequence message;
 
     private AppCompatButton btnPositive;
     private AppCompatButton btnNegative;
@@ -37,12 +37,12 @@ public class NomwellInfoDialog {
         btnNegative = (AppCompatButton) view.findViewById(R.id.btnNegative);
     }
 
-    public String getMessage() {
+    public CharSequence getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        txtMessage.setText(message);
+    public void setMessage(CharSequence message) {
+        txtMessage.setText(message.toString().trim());
         this.message = message;
     }
 

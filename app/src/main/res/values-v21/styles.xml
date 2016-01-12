@@ -6,4 +6,15 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="ContactsAppThemeNoActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@color/blue_filter</item>
+        <item name="colorPrimaryDark">@color/blue_filter</item>
+        <item name="actionSheetStyle">@style/ActionSheetStyleContacts</item>
+        <item name="colorAccent">@color/blue_filter_light</item>
+    </style>
 </resources>

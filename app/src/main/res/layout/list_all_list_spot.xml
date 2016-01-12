@@ -16,6 +16,31 @@
         android:orientation="horizontal"
         android:weightSum="1">
 
+        <ImageView
+            android:id="@+id/imvwWantToGo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_swipe"
+            android:clickable="true"
+            android:gravity="center"
+            android:src="@drawable/ic_swipe_button_want_to_go"
+            android:text="Want To Go" />
+
+        <ImageView
+            android:id="@+id/imvwGone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_toRightOf="@id/imvwWantToGo"
+            android:layout_weight="0.5"
+            android:background="@drawable/selector_swipe"
+            android:clickable="true"
+            android:gravity="center"
+            android:src="@drawable/ic_swipe_button_gone"
+            android:text="Gone" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -31,6 +56,8 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/margin_large"
             android:layout_marginRight="@dimen/margin_large"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
             android:src="@drawable/ic_search_black_24dp" />
 
         <ImageView

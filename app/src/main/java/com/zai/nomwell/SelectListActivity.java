@@ -21,5 +21,4 @@ public class SelectListActivity extends BaseActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
-
 }

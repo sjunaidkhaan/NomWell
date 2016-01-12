@@ -8,6 +8,7 @@
     <dimen name="edittext_padding">8dp</dimen>
     <dimen name="textview_padding">8dp</dimen>
     <dimen name="margin">5dp</dimen>
+    <dimen name="margin_small">2dp</dimen>
     <dimen name="margin_large">15dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="padding">5dp</dimen>
@@ -28,4 +29,5 @@
     <dimen name="text_size_header_small">18sp</dimen>
     <dimen name="size_indicator">20dp</dimen>
     <dimen name="margin_med">10dp</dimen>
+    <dimen name="filter_row_height">40dp</dimen>
 </resources>

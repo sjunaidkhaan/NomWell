@@ -89,4 +89,12 @@
     <string name="title_activity_select_spot">Select Spot</string>
     <string name="select">select</string>
     <string name="title_activity_select_list">Select List</string>
+    <string name="title_activity_nomwell_contacts">Nomwell Contacts</string>
+    <string name="status_">Status:</string>
+    <string name="stars_">Stars:</string>
+    <string name="price_">Price:</string>
+    <string name="cuisine_">Cuisine:</string>
+    <string name="tag_">Tag:</string>
+    <string name="title_activity_contacts_spot">ContactsSpot</string>
+    <string name="title_activity_contact_list_spot">Contact List Spot</string>
 </resources>

@@ -18,6 +18,8 @@ public class ListSpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder im
 
     private OnRecyclerViewClickListener clickListener;
 
+    public ImageView imvwWanToGo;
+    public ImageView imvwGone;
     public ImageView imvwIcon;
     public ImageView imvwCheck;
     public AppCompatTextView txtHeader;
@@ -31,7 +33,12 @@ public class ListSpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder im
 
         this.clickListener = clickListener;
 
+        imvwWanToGo = (ImageView) itemView.findViewById(R.id.imvwWantToGo);
+        imvwWanToGo.setOnClickListener(this);
+        imvwGone = (ImageView) itemView.findViewById(R.id.imvwGone);
+        imvwGone.setOnClickListener(this);
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
+        imvwIcon.setOnClickListener(this);
         imvwCheck = (ImageView) itemView.findViewById(R.id.imvwCheck);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
         txtHeader.setOnClickListener(this);
@@ -44,10 +51,9 @@ public class ListSpotsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder im
         SwipeLayout.LayoutParams params = (SwipeLayout.LayoutParams) llSwipeContent.getLayoutParams();
         params.width = totalWidth / 2;
 
-        if(showCheck) {
+        if (showCheck) {
             imvwCheck.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             imvwCheck.setVisibility(View.GONE);
         }
     }

@@ -147,9 +147,12 @@
                         android:textStyle="bold" />
 
                     <RelativeLayout
+                        android:id="@+id/rlStars"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/vwCenter2"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackground"
                         android:padding="@dimen/textview_padding">
 
                         <android.support.v7.widget.AppCompatImageView
@@ -187,6 +190,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/txtTags"
+                        android:clickable="true"
+                        android:background="?attr/selectableItemBackground"
                         android:drawableLeft="@drawable/ic_list_grey600_24dp"
                         android:text="Breakfast of Champions, Demo" />
 

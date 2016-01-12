@@ -1,19 +1,27 @@
 package com.zai.nomwell.fragments;
 
+import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
+import com.zai.nomwell.AddNewSpotActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.ListSpotAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
@@ -38,6 +46,8 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
 
     private boolean dataSet = false;
 
+    private boolean populateList = false;
+
     private MySpotsActivity activity;
 
     public SelectListFragment() {
@@ -46,6 +56,7 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_select_list, container, false);
     }
 
@@ -87,6 +98,7 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
         if (!dataSet) {
             tabLayout.addTab(tabLayout.newTab().setText("ALL"));
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_pin_24));
+            tabLayout.getTabAt(1).getIcon().setColorFilter(ContextCompat.getColor(getContext(), R.color.white), PorterDuff.Mode.SRC_IN);
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_done_white_24dp));
         }
     }
@@ -99,13 +111,19 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
                     adapter = new ListSpotAdapter(activity.getMySpotsDummyData(), false, SelectListFragment.this);
                     break;
                 case 1:
-                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, SelectListFragment.this);
+                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, SelectListFragment.this);
                     break;
                 case 2:
-                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE), false, SelectListFragment.this);
+                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, SelectListFragment.this);
                     break;
             }
-            rcvwSpots.setAdapter(adapter);
+            if (populateList) {
+                rcvwSpots.setAdapter(adapter);
+            } else {
+                adapter = null;
+            }
             setEmptyViewVisibility();
         }
 
@@ -124,7 +142,9 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
         if (adapter != null) {
             getView().findViewById(R.id.emptyView).setVisibility(adapter.getItemCount() > 0
                     ? View.GONE : View.VISIBLE);
+            getView().findViewById(R.id.llShare).setVisibility(View.VISIBLE);
         } else {
+            getView().findViewById(R.id.llShare).setVisibility(View.INVISIBLE);
             getView().findViewById(R.id.emptyView).setVisibility(View.VISIBLE);
         }
     }
@@ -166,11 +186,37 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
                     view.setTag(true);
                 }
                 break;
+            case R.id.imvwIcon:
+                Intent intent = new Intent(getContext(), AddNewSpotActivity.class);
+                intent.putExtra(AddNewSpotActivity.EXTRA_TITLE, adapter.getItemAt(position).header);
+                startActivity(intent);
+                break;
         }
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_select_list, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_map:
+                Intent map = new Intent(getActivity(), TabbedMapActivity.class);
+                startActivity(map);
+                break;
+            case R.id.action_populate_list:
+                populateList = true;
+                tabSelectedListener.onTabSelected(tabLayout.getTabAt(0));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

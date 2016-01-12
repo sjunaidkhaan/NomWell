@@ -1,10 +1,12 @@
 package com.zai.nomwell.fragments;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -109,6 +111,7 @@ public class SelectSpotFragment extends Fragment implements View.OnClickListener
         if (!dataSet) {
             tabLayout.addTab(tabLayout.newTab().setText("ALL"));
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_pin_24));
+            tabLayout.getTabAt(1).getIcon().setColorFilter(ContextCompat.getColor(getContext(), R.color.white), PorterDuff.Mode.SRC_IN);
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_done_white_24dp));
         }
     }
@@ -118,13 +121,15 @@ public class SelectSpotFragment extends Fragment implements View.OnClickListener
         public void onTabSelected(TabLayout.Tab tab) {
             switch (tab.getPosition()) {
                 case 0:
-                    adapter = new ListSpotAdapter(activity.getMySpotsDummyData(), true, SelectSpotFragment.this);
+                    adapter = new ListSpotAdapter(activity.getMySpotsDummyData(), false, SelectSpotFragment.this);
                     break;
                 case 1:
-                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), true, SelectSpotFragment.this);
+                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, SelectSpotFragment.this);
                     break;
                 case 2:
-                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE), true, SelectSpotFragment.this);
+                    adapter = new ListSpotAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, SelectSpotFragment.this);
                     break;
             }
             rcvwSpots.setAdapter(adapter);

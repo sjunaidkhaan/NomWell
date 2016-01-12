@@ -78,8 +78,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 if (mode == LoginActivity.MODE_SINGUP) {
                     showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                             && !isEmailEmpty && !isPasswordEmpty);
-                } else {
+                } else if (mode == LoginActivity.MODE_LOGIN) {
                     showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+                } else if (mode == LoginActivity.MODE_EDIT) {
+                    showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
+                            && !isEmailEmpty);
                 }
             }
         });
@@ -101,8 +104,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 if (mode == LoginActivity.MODE_SINGUP) {
                     showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                             && !isEmailEmpty && !isPasswordEmpty);
-                } else {
+                } else if (mode == LoginActivity.MODE_LOGIN) {
                     showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+                } else if (mode == LoginActivity.MODE_EDIT) {
+                    showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
+                            && !isEmailEmpty);
                 }
             }
         });
@@ -124,8 +130,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 if (mode == LoginActivity.MODE_SINGUP) {
                     showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                             && !isEmailEmpty && !isPasswordEmpty);
-                } else {
+                } else if (mode == LoginActivity.MODE_LOGIN) {
                     showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+                } else if (mode == LoginActivity.MODE_EDIT) {
+                    showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
+                            && !isEmailEmpty);
                 }
             }
         });
@@ -147,8 +156,11 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 if (mode == LoginActivity.MODE_SINGUP) {
                     showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                             && !isEmailEmpty && !isPasswordEmpty);
-                } else {
+                } else if (mode == LoginActivity.MODE_LOGIN) {
                     showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+                } else if (mode == LoginActivity.MODE_EDIT) {
+                    showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
+                            && !isEmailEmpty);
                 }
             }
         });
@@ -167,21 +179,33 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
             showHideSignUp(!isFirstNameEmpty && !isLastNameEmpty
                     && !isEmailEmpty && !isPasswordEmpty);
             ((LoginActivity) getActivity()).getSupportActionBar().setTitle("Sign Up");
-        } else {
+            btnSignUp.setText("Sign Up");
+            txtForgotPassword.setVisibility(View.GONE);
+            view.findViewById(R.id.llName).setVisibility(View.VISIBLE);
+        } else if (mode == LoginActivity.MODE_LOGIN) {
             showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
             ((LoginActivity) getActivity()).getSupportActionBar().setTitle("Log In");
+            btnSignUp.setText("Log In");
+            view.findViewById(R.id.llName).setVisibility(View.INVISIBLE);
+            txtForgotPassword.setText("Forgot Password?");
+        } else if (mode == LoginActivity.MODE_EDIT) {
+            showHideSignUp(!isEmailEmpty && !isPasswordEmpty);
+            ((LoginActivity) getActivity()).getSupportActionBar().setTitle("Edit Profile");
+            btnSignUp.setText("Save");
+            txtForgotPassword.setText("Change Password");
+            txtPassword.setVisibility(View.GONE);
         }
-
-        btnSignUp.setText(((LoginActivity) getActivity()).getSupportActionBar().getTitle());
-        view.findViewById(R.id.llName).setVisibility(mode == LoginActivity.MODE_SINGUP ? View.VISIBLE : View.INVISIBLE);
-        txtForgotPassword.setVisibility(mode == LoginActivity.MODE_SINGUP ? View.GONE : View.VISIBLE);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnSignUp:
-                startActivity(new Intent(getActivity(), ChooseCityActivity.class));
+                if (mode != LoginActivity.MODE_EDIT) {
+                    startActivity(new Intent(getActivity(), ChooseCityActivity.class));
+                } else {
+                    getActivity().finish();
+                }
                 break;
         }
     }

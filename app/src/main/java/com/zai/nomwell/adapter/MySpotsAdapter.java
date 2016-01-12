@@ -10,6 +10,7 @@ import com.zai.nomwell.R;
 import com.zai.nomwell.adapter.holder.MySpotsHolder;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.util.Util;
 
 import java.util.ArrayList;
 
@@ -42,17 +43,26 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
         holder.txtHeader.setText(msd.header);
         holder.txtSubInfo.setText(msd.subInfo);
         holder.txtInfo.setText(msd.info);
-        int icon = R.drawable.ic_add_white_36dp;
-        if (msd.status == MySpotsData.STATUS_GONE) {
-            icon = R.drawable.ic_done_white_24dp;
-        } else if (msd.status == MySpotsData.STATUS_WANT_TO_GO) {
-            icon = R.drawable.ic_pin;
-        } else if (msd.status == MySpotsData.STATUS_GONE) {
-            icon = R.drawable.ic_add_white_36dp;
+        int icon;
+        if (msd.icon > 0) {
+            icon = msd.icon;
+        } else {
+            if (msd.status == MySpotsData.STATUS_GONE) {
+                icon = R.drawable.ic_done_white_24dp;
+            } else if (msd.status == MySpotsData.STATUS_WANT_TO_GO) {
+                icon = R.drawable.ic_pin;
+            } else {
+                icon = R.drawable.ic_add_white_36dp;
+            }
         }
         holder.imvwIcon.setImageResource(icon);
-        holder.imvwIcon.setColorFilter(
-                ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimary));
+        Util.log("MySpotAdapter", "colorFilter: " + msd.colorFilter);
+        if (msd.colorFilter != 0) {
+            holder.imvwIcon.setColorFilter(msd.colorFilter);
+        } else {
+            holder.imvwIcon.setColorFilter(
+                    ContextCompat.getColor(holder.itemView.getContext(), R.color.colorPrimary));
+        }
         holder.ratingBar.setProgress(msd.rating);
         if (msd.status == MySpotsData.STATUS_GONE) {
             holder.ratingBar.setVisibility(View.VISIBLE);
@@ -60,6 +70,10 @@ public class MySpotsAdapter extends BaseSwipeAdapter<MySpotsHolder> {
             holder.ratingBar.setVisibility(View.GONE);
         }
 
+    }
+
+    public MySpotsData getItemAt(int position) {
+        return mySpotsData.get(position);
     }
 
     @Override

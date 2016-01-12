@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_large">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/lblStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_centerVertical="true"
+            android:gravity="left|center_vertical"
+            android:text="@string/status_"
+            android:textSize="@dimen/text_size_header_small" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin_med"
+            android:gravity="left|center_vertical"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stars_"
+                android:textSize="@dimen/text_size_header_small" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblGoneOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblStars"
+                android:text="(Gone only)" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/lblPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin_med"
+            android:gravity="left|center_vertical"
+            android:text="@string/price_"
+            android:textSize="@dimen/text_size_header_small" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/lblCuisine"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin_med"
+            android:gravity="left|center_vertical"
+            android:text="@string/cuisine_"
+            android:textSize="@dimen/text_size_header_small" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/lblTag"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/margin_med"
+            android:gravity="left|center_vertical"
+            android:text="@string/tag_"
+            android:textSize="@dimen/text_size_header_small" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.75"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/llSpots"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_row_height"
+            android:background="@drawable/bg_filter_view_main"
+            android:weightSum="3">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtAll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_left"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="ALL"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imvwWantToGo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="@dimen/padding"
+                android:src="@drawable/ic_pin_24" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imvwGone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_right"
+                android:clickable="true"
+                android:gravity="center"
+                android:padding="@dimen/padding"
+                android:src="@drawable/ic_done_grey600_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llStars"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_marginTop="@dimen/margin_med"
+            android:background="@drawable/bg_filter_view_main"
+            android:weightSum="5">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lbl1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_left"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lbl2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="2"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lbl3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="3"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lbl4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lbl5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_right"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@color/filter_dialog_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPrice"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_marginTop="@dimen/margin_med"
+            android:background="@drawable/bg_filter_view_main"
+            android:weightSum="4">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblPrice1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_left"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="$"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblPrice2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="$$"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblPrice3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_center"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="$$$"
+                android:textColor="@color/filter_dialog_color" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblPrice4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_weight="1"
+                android:background="@drawable/bg_filter_view_right"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="$$$$"
+                android:textColor="@color/filter_dialog_color" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_marginTop="@dimen/margin_med">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtCuisine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_large"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/filter_row_height"
+            android:layout_marginTop="@dimen/margin_med">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txtTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_large"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -65,12 +65,26 @@ public class NomwellStarsDialog {
     }
 
     public void setPositive(String text, View.OnClickListener listener) {
-        btnPositive.setText(text);
+        if (text != null) {
+            btnPositive.setText(text);
+            btnPositive.setVisibility(View.VISIBLE);
+        } else {
+            btnPositive.setVisibility(View.INVISIBLE);
+        }
         btnPositive.setOnClickListener(listener);
     }
 
     public void setNegative(String text, View.OnClickListener listener) {
-        btnNegative.setText(text);
+        if (text != null) {
+            btnNegative.setText(text);
+            btnNegative.setVisibility(View.VISIBLE);
+        } else {
+            btnNegative.setVisibility(View.INVISIBLE);
+        }
         btnNegative.setOnClickListener(listener);
+    }
+
+    public void addStarsClickListener(View.OnClickListener listener) {
+        ratingBar.setOnClickListener(listener);
     }
 }

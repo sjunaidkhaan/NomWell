@@ -13,7 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/white" />
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="@dimen/tab_indicator_width"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white" />
 
     <RelativeLayout
         android:id="@+id/rlTop"
@@ -157,8 +160,8 @@
         layout="@layout/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"
-        android:layout_below="@id/rlTop" />
+        android:layout_below="@id/rlTop"
+        android:layout_margin="@dimen/margin" />
 
     <com.malinskiy.superrecyclerview.SuperRecyclerView
         android:id="@+id/rcvwSpots"

@@ -18,19 +18,15 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_confirm_email"
-        android:orderInCategory="100"
-        android:title="Confirm Email"
-        app:showAsAction="never" />
-
-    <item android:id="@+id/action_populate_list"
+        android:id="@+id/action_populate_list"
         android:orderInCategory="100"
         android:title="Populate Data"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
-    <item android:id="@+id/action_populate_list_with_check"
+    <item
+        android:id="@+id/action_populate_list_with_check"
         android:orderInCategory="100"
         android:title="Populate Data with check"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 
 </menu>

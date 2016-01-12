@@ -25,7 +25,7 @@
             android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
-            android:src="@drawable/ic_want_to_go"
+            android:src="@drawable/ic_swipe_button_want_to_go"
             android:text="Want To Go" />
 
         <ImageView
@@ -38,7 +38,7 @@
             android:background="@drawable/selector_swipe"
             android:clickable="true"
             android:gravity="center"
-            android:src="@drawable/ic_gone"
+            android:src="@drawable/ic_swipe_button_gone"
             android:text="Gone" />
 
     </LinearLayout>

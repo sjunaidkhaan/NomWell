@@ -2,6 +2,7 @@ package com.zai.nomwell.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,15 +19,19 @@ import android.view.ViewGroup;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.SelectListActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MyListsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
+import com.zai.nomwell.db.MyListsData;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerViewClickListener{
+public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerViewClickListener {
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
@@ -118,7 +123,7 @@ public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerV
 
         switch (item.getItemId()) {
             case R.id.action_populate_list:
-                adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Delete", this);
+                adapter = new MyListsAdapter(getMyListsDummyData(), "Delete", this);
                 rcvwSpots.setAdapter(adapter);
                 setEmptyViewVisibility();
                 break;
@@ -126,6 +131,7 @@ public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerV
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public String getFragmentTitle(Context context) {
         return context.getString(R.string.spot_recs);
@@ -133,7 +139,16 @@ public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerV
 
     @Override
     public void onItemClick(View view, int position) {
-        showUnfollowDialog("Delete");
+        switch (view.getId()) {
+            case R.id.lblDelete:
+                showUnfollowDialog("Delete");
+                break;
+            default:
+                Intent intent = new Intent(getActivity(), SelectListActivity.class);
+                intent.putExtra(SelectListActivity.EXTRA_TITLE, adapter.getTitle(position));
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
@@ -144,5 +159,16 @@ public class MyListsSpotRecsFragment extends BaseFragment implements OnRecyclerV
     @Override
     public int getAdapterTotal() {
         return adapter != null ? adapter.getItemCount() : 0;
+    }
+
+    public ArrayList<MyListsData> getMyListsDummyData() {
+        ArrayList<MyListsData> mlds = new ArrayList<>();
+
+        MyListsData mld = new MyListsData();
+        mld.header = "Received 09/19/15";
+        mld.info = "by Sebastian Stankiewicz; 3 spots";
+        mlds.add(mld);
+
+        return mlds;
     }
 }

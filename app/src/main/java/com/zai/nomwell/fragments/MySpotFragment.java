@@ -2,14 +2,18 @@ package com.zai.nomwell.fragments;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 
+import com.baoyz.actionsheet.ActionSheet;
 import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.AddSpotsActivity;
 import com.zai.nomwell.MySpotsActivity;
@@ -29,13 +34,14 @@ import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.MySpotsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.dialog.NomwellFilterDialog;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
+import com.zai.nomwell.dialog.NomwellMultipleChoiceListDialog;
 import com.zai.nomwell.dialog.NomwellStarsDialog;
 import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
 import com.zai.nomwell.view.NomwellSearchView;
-import com.zai.nomwell.view.NomwellTab;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,14 +61,11 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
 
     private boolean dataSet = false;
 
+    private boolean isFiltered = false;
+
     private MySpotsActivity activity;
 
-    private NomwellTab tab1;
-    private NomwellTab tab2;
-    private NomwellTab tab3;
-
     private NomwellSearchView searchView;
-
 
     public MySpotFragment() {
         // Required empty public constructor
@@ -97,6 +100,21 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
 
         layoutSortBy = new NomwellHalfClickableTextView(view.findViewById(R.id.layoutSortBy));
         layoutSortBy.setNormalText("Sort by:");
+        layoutSortBy.addClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showIOSDialog(new String[]{"Name", "Rating (Gone Only)", "Near Me"}, new ActionSheet.ActionSheetListener() {
+                    @Override
+                    public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
+
+                    }
+
+                    @Override
+                    public void onOtherButtonClick(ActionSheet actionSheet, int index) {
+                    }
+                });
+            }
+        });
         layoutSortBy.setClickableText("Name");
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getActivity());
@@ -117,21 +135,21 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         view.findViewById(R.id.llAddToLists).setOnClickListener(this);
     }
 
+    public void showIOSDialog(String topItems[], ActionSheet.ActionSheetListener listener) {
+        ActionSheet.createBuilder(getContext(), getFragmentManager())
+                .setCancelButtonTitle("Cancel")
+                .setOtherButtonTitles(topItems)
+                .setCancelableOnTouchOutside(true)
+                .setListener(listener).show();
+    }
 
     private void setViews() {
         if (!dataSet) {
-//            tab1 = new NomwellTab(getContext(), R.drawable.left_selected, R.drawable.left_normal);
-//            tab1.setText("ALL");
-//            tab2 = new NomwellTab(getContext(), R.drawable.center_selected, R.drawable.center_normal);
-//            tab2.setImageResource(R.drawable.ic_pin_24);
-//            tab3 = new NomwellTab(getContext(), R.drawable.right_selected, R.drawable.right_normal);
-//            tab3.setImageResource(R.drawable.ic_done_white_24dp);
             tabLayout.addTab(tabLayout.newTab().setText("ALL"));
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_pin_24));
             tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_done_white_24dp));
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab1.getView()));
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab2.getView()));
-//            tabLayout.addTab(tabLayout.newTab().setCustomView(tab3.getView()));
+
+            tabLayout.getTabAt(1).getIcon().setColorFilter(ContextCompat.getColor(getContext(), R.color.white), PorterDuff.Mode.SRC_IN);
         }
     }
 
@@ -152,14 +170,15 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                     adapter = new MySpotsAdapter(activity.getMySpotsDummyData(), false, MySpotFragment.this);
                     break;
                 case 1:
-                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, MySpotFragment.this);
+                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, MySpotFragment.this);
                     break;
                 case 2:
-                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE), false, MySpotFragment.this);
+                    adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE,
+                            ContextCompat.getColor(getContext(), R.color.colorPrimary)), false, MySpotFragment.this);
                     break;
             }
-//            rcvwSpots.setAdapter(adapter);
-            adapter = null;
+            rcvwSpots.setAdapter(adapter);
             setEmptyViewVisibility();
         }
 
@@ -184,6 +203,13 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         switch (id) {
             case R.id.action_map:
                 Intent map = new Intent(getActivity(), TabbedMapActivity.class);
+                if (isFiltered) {
+                    map.putExtra(TabbedMapActivity.EXTRA_TITLE, "Filter Result");
+                    map.putExtra(TabbedMapActivity.EXTRA_MODE, TabbedMapActivity.MODE_FILTER);
+                } else {
+                    map.putExtra(TabbedMapActivity.EXTRA_TITLE, "My Spots");
+                    map.putExtra(TabbedMapActivity.EXTRA_MODE, TabbedMapActivity.MODE_NORMAL);
+                }
                 startActivity(map);
                 break;
             case R.id.action_populate_list:
@@ -201,10 +227,45 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 getView().findViewById(R.id.llBottomButtons).setVisibility(View.GONE);
                 getView().findViewById(R.id.layoutSearch).setVisibility(View.GONE);
                 break;
+            case R.id.action_filter:
+                showFilterDialog();
+                break;
         }
 
 
         return true;
+    }
+
+    private void showFilterDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Spot Filter");
+        final NomwellFilterDialog nomwellFilterDialog = new NomwellFilterDialog(getContext());
+        nomwellFilterDialog.setCuisineText("Add");
+        nomwellFilterDialog.setTagText("Add");
+        nomwellFilterDialog.addClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switch (view.getId()) {
+                    case R.id.txtCuisine:
+                        showCuisinesDialog(nomwellFilterDialog);
+                        break;
+                    case R.id.txtTag:
+                        showTagsDialog(nomwellFilterDialog);
+                        break;
+                }
+            }
+        });
+        builder.setView(nomwellFilterDialog.getView());
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                isFiltered = true;
+                activity.getSupportActionBar().setTitle("Filter Results");
+                getView().findViewById(R.id.llAddSpots).setVisibility(View.INVISIBLE);
+            }
+        });
+        builder.setNegativeButton("Back", null);
+        builder.create().show();
     }
 
     @Override
@@ -226,15 +287,14 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
         nomwellListDialog.setMessage(getContext().getString(R.string.must_add_places));
-        nomwellListDialog.setOptions(new String[]{"OK"});
-        builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+        nomwellListDialog.setOptions(new String[]{"OK"}, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
             }
         });
+        builder.setView(nomwellListDialog.getView());
 
         dialog.show();
     }
@@ -276,6 +336,80 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         }
     }
 
+    private String CUISINES[] = new String[]{
+            "American (New)", "American (Traditional)", "Caribbean", "Chinese", "Indian",
+            "Polish", "Southern", "Vegan", "Vegetarian"
+    };
+
+    private void showCuisinesDialog(final NomwellFilterDialog dialog) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Choose Cuisines");
+        final NomwellMultipleChoiceListDialog nomwellListDialog = new NomwellMultipleChoiceListDialog(getContext());
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                SparseBooleanArray array = nomwellListDialog.getCheckedItems();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < array.size(); i++) {
+                    if (array.get(i)) {
+                        sb.append(CUISINES[i]);
+                        sb.append(" or ");
+                    }
+                }
+                sb.replace(sb.length() - 4, sb.length(), "");
+                dialog.setCuisineText(sb.toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        nomwellListDialog.setMultipleOptions(CUISINES, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Util.log(TAG, "Item Checked: " + i + " -> " + nomwellListDialog.isChecked(i));
+                nomwellListDialog.setChecked(i, nomwellListDialog.isChecked(i));
+            }
+        });
+        builder.setView(nomwellListDialog.getView());
+        builder.create().show();
+
+    }
+
+    private String TAGS[] = new String[]{
+            "Beer Gardens", "BYOB", "Clubs", "Date Spots", "Duke Bar",
+            "Good For Groups", "Late Night", "MSU Bar", "Pool"
+    };
+
+    private void showTagsDialog(final NomwellFilterDialog dialog) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Choose Tags");
+        final NomwellMultipleChoiceListDialog nomwellListDialog = new NomwellMultipleChoiceListDialog(getContext());
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int which) {
+                SparseBooleanArray array = nomwellListDialog.getCheckedItems();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < array.size(); i++) {
+                    if (array.get(i)) {
+                        sb.append(TAGS[i]);
+                        sb.append(" or ");
+                    }
+                }
+                sb.replace(sb.length() - 4, sb.length(), "");
+                dialog.setTagText(sb.toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        nomwellListDialog.setMultipleOptions(TAGS, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Util.log(TAG, "Item Checked: " + i + " -> " + nomwellListDialog.isChecked(i));
+                nomwellListDialog.setChecked(i, nomwellListDialog.isChecked(i));
+            }
+        });
+        builder.setView(nomwellListDialog.getView());
+        builder.create().show();
+
+    }
+
     @Override
     public void onItemClick(View view, int position) {
         switch (view.getId()) {
@@ -286,7 +420,7 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
                 break;
             case R.id.imvwCheck:
                 boolean checked = false;
-                if(view.getTag() != null){
+                if (view.getTag() != null) {
                     checked = (boolean) view.getTag();
                 }
                 if (checked) {
@@ -382,15 +516,14 @@ public class MySpotFragment extends Fragment implements View.OnClickListener, On
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
         nomwellListDialog.setMessage("Spot added to " + spotName);
-        nomwellListDialog.setOptions(new String[]{"OK"});
-        builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+        nomwellListDialog.setOptions(new String[]{"OK"}, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
             }
         });
+        builder.setView(nomwellListDialog.getView());
 
         dialog.show();
     }

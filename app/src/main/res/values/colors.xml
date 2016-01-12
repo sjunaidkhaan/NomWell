@@ -23,4 +23,9 @@
     <color name="add_spot_text_color">#616161</color>
 
     <color name="select_spot_blue_color">#B3C6FB</color>
+
+    <color name="filter_dialog_color">#556270</color>
+
+    <color name="blue_filter">#678EF7</color>
+    <color name="blue_filter_light">#83a0ec</color>
 </resources>

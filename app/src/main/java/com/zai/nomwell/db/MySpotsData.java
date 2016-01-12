@@ -13,5 +13,7 @@ public class MySpotsData {
     public String info;
     public String subInfo;
     public int rating;
-    public int status;
+    public int icon;
+    public int status = 0;
+    public int colorFilter = 0;
 }

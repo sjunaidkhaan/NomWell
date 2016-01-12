@@ -36,6 +36,7 @@ public class MyListsHolder extends BaseSwipeAdapter.BaseSwipeableViewHolder impl
         lblDelete.setOnClickListener(this);
 
         imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
+        imvwIcon.setOnClickListener(this);
         txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
         txtHeader.setOnClickListener(this);
         txtInfo = (AppCompatTextView) itemView.findViewById(R.id.txtInfo);

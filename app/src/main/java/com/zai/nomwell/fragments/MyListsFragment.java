@@ -115,9 +115,6 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.llCreateLists).setOnClickListener(this);
 
         setViews();
-
-        view.findViewById(R.id.llShare).setOnClickListener(this);
-        view.findViewById(R.id.llCreateLists).setOnClickListener(this);
     }
 
 
@@ -172,16 +169,15 @@ public class MyListsFragment extends Fragment implements View.OnClickListener {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         NomwellListDialog nomwellListDialog = new NomwellListDialog(getContext());
         nomwellListDialog.setMessage(getContext().getString(R.string.must_have_list));
-        nomwellListDialog.setOptions(new String[]{"OK"});
-        builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+        nomwellListDialog.setOptions(new String[]{"OK"}, new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
                 showListInputDialog();
             }
         });
+        builder.setView(nomwellListDialog.getView());
 
         dialog.show();
     }

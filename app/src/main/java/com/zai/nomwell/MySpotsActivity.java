@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
 import com.zai.nomwell.dialog.NomwellInputDialog;
 import com.zai.nomwell.dialog.NomwellListDialog;
+import com.zai.nomwell.dialog.NomwellPaddedListDialog;
 import com.zai.nomwell.fragments.MyListsFragment;
 import com.zai.nomwell.fragments.MySpotFragment;
 import com.zai.nomwell.util.Util;
@@ -42,6 +44,7 @@ public class MySpotsActivity extends BaseActivity
 
     private NavigationView navigationView;
     private ListView listOptions;
+    private AppCompatImageView imvwGear;
 
     private static final String OPTIONS[] = {"My Spots  ", "My Lists",
             "Explore Friends' Spots", "Switch Cities", "Import an Existing List"};
@@ -93,6 +96,14 @@ public class MySpotsActivity extends BaseActivity
             myListsFragment = new MyListsFragment();
         }
 
+        imvwGear = (AppCompatImageView) findViewById(R.id.imvwGear);
+        imvwGear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSettingsDialog();
+            }
+        });
+
         setCurrentFragment(mySpotFragment);
 
     }
@@ -101,6 +112,88 @@ public class MySpotsActivity extends BaseActivity
     protected void onResume() {
         super.onResume();
         updateNavigationDrawer();
+    }
+
+    private void showSettingsDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Settings");
+        final NomwellPaddedListDialog nomwellListDialog = new NomwellPaddedListDialog(this);
+        builder.setNeutralButton("Cancel", null);
+        builder.setView(nomwellListDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellListDialog.setOptions(new String[]{
+                "Send Us Feedback", "Edit Profile", "Profile Visibility", "Spot Note Default", "Log Out"
+        }, new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                dialog.dismiss();
+                switch (i) {
+                    case 0:
+                        break;
+                    case 1:
+                        Intent intent = new Intent(MySpotsActivity.this, LoginActivity.class);
+                        intent.putExtra(LoginActivity.EXTRA_MODE, LoginActivity.MODE_EDIT);
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        showProfileVisibilityDialog();
+                        break;
+                    case 3:
+                        showNoteVisibilityDialog();
+                        break;
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    private void showProfileVisibilityDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Profile Visibility");
+        final NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(this);
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setMessage(Html.fromHtml(String.format("<p>A visible user can be discovered by friends who " +
+                "have him/her in their phone\'s contact. Those friends can view the user\'s spots, lists, " +
+                "and visible notes.</p><p>A visible user can also discover and view his/her friends the same way" +
+                "</p><p><b>Your profile is currently: %s</b></p>", "Visible")));
+        nomwellInfoDialog.setPositive("Turn Invisible", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Leave Visible", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void showNoteVisibilityDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Note Visibility");
+        final NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(this);
+        builder.setView(nomwellInfoDialog.getView());
+        final AlertDialog dialog = builder.create();
+        nomwellInfoDialog.setMessage(Html.fromHtml(String.format("<p>when User\'s note for a spot is visible," +
+                " that note can be viewed by friends when they are exploring the user\'s spots or lists.</p>" +
+                "<p><b>Your default for new notes: %s</b></p>", "Visible")));
+        nomwellInfoDialog.setPositive("Turn Invisible", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        nomwellInfoDialog.setNegative("Leave Visible", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void updateNavigationDrawer() {
@@ -171,11 +264,9 @@ public class MySpotsActivity extends BaseActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.now_lets_get_started));
         NomwellListDialog nomwellListDialog = new NomwellListDialog(this);
-        nomwellListDialog.setMessage(getString(R.string.lets_get_started_message));
-        nomwellListDialog.setOptions(getResources().getStringArray(R.array.lets_started_options));
-        builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+        nomwellListDialog.setMessage(getString(R.string.lets_get_started_message));
+        nomwellListDialog.setOptions(getResources().getStringArray(R.array.lets_started_options), new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.dismiss();
@@ -185,6 +276,7 @@ public class MySpotsActivity extends BaseActivity
                 updateNavigationDrawer();
             }
         });
+        builder.setView(nomwellListDialog.getView());
 
         dialog.show();
     }
@@ -225,10 +317,8 @@ public class MySpotsActivity extends BaseActivity
         builder.setTitle(getString(R.string.fantastic_));
         NomwellListDialog nomwellListDialog = new NomwellListDialog(this);
         nomwellListDialog.setMessage("Where is your list located");
-        nomwellListDialog.setOptions(getResources().getStringArray(R.array.list_location_options));
-        builder.setView(nomwellListDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellListDialog.setItemClickListener(new AdapterView.OnItemClickListener() {
+        nomwellListDialog.setOptions(getResources().getStringArray(R.array.list_location_options), new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if (i == 0) {
@@ -239,6 +329,7 @@ public class MySpotsActivity extends BaseActivity
                 dialog.dismiss();
             }
         });
+        builder.setView(nomwellListDialog.getView());
 
         dialog.show();
     }
@@ -258,6 +349,7 @@ public class MySpotsActivity extends BaseActivity
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                showLastStepDialog();
             }
         });
         nomwellInfoDialog.setNegative("Don't Allow", new View.OnClickListener() {
@@ -277,6 +369,7 @@ public class MySpotsActivity extends BaseActivity
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Last Step");
         final NomwellInputDialog nomwellInputDialog = new NomwellInputDialog(this);
+        nomwellInputDialog.setHint("XXX-XXX-XXXX");
         nomwellInputDialog.setMessage(getString(R.string.last_step_desc));
         builder.setView(nomwellInputDialog.getView());
         final AlertDialog dialog = builder.create();
@@ -284,6 +377,7 @@ public class MySpotsActivity extends BaseActivity
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                startActivity(new Intent(MySpotsActivity.this, NomwellContactsActivity.class));
             }
         });
         nomwellInputDialog.setNegative("Back", new View.OnClickListener() {
@@ -357,11 +451,12 @@ public class MySpotsActivity extends BaseActivity
         return mySpotsData;
     }
 
-    public ArrayList<MySpotsData> getFilteredDummyData(int status) {
+    public ArrayList<MySpotsData> getFilteredDummyData(int status, int colorFilter) {
         ArrayList<MySpotsData> all = getMySpotsDummyData();
         ArrayList<MySpotsData> filtered = new ArrayList<>();
         for (MySpotsData msd : all) {
             if (msd.status == status) {
+                msd.colorFilter = colorFilter;
                 filtered.add(msd);
             }
         }
@@ -424,6 +519,8 @@ public class MySpotsActivity extends BaseActivity
         } else if (position == 1) {
             setCurrentFragment(myListsFragment);
             getSupportActionBar().setTitle("My Lists");
+        } else if (position == 2) {
+            showSendToFriendDialog();
         } else if (position == 3) {
 //            startActivity(new Intent(this, ChooseCityActivity.class));
             showIOSDialog(SHEETITEMS, new ActionSheet.ActionSheetListener() {

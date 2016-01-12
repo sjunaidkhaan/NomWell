@@ -1,7 +1,9 @@
 package com.zai.nomwell.dialog;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatTextView;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -34,6 +36,7 @@ public class NomwellListDialog {
 
     private void init() {
         txtMessage = (AppCompatTextView) view.findViewById(R.id.txtMessage);
+        txtMessage.setVisibility(View.GONE);
         listOptions = (ListView) view.findViewById(R.id.listOptions);
     }
 
@@ -42,6 +45,7 @@ public class NomwellListDialog {
     }
 
     public void setMessage(String message) {
+//        txtMessage.setVisibility(message != null ? View.VISIBLE : View.GONE);
         txtMessage.setText(message);
         this.message = message;
     }
@@ -50,14 +54,36 @@ public class NomwellListDialog {
         return options;
     }
 
-    public void setOptions(String[] options) {
+    public void setOptions(String[] options, AdapterView.OnItemClickListener listener) {
         listOptions.setAdapter(new ArrayAdapter<>(view.getContext(),
                 R.layout.simple_text_item_1,
                 options));
         this.options = options;
+        listOptions.setOnItemClickListener(listener);
     }
 
-    public void setItemClickListener(AdapterView.OnItemClickListener listener) {
+    public void setListDivider(Drawable drawable) {
+        listOptions.setDivider(drawable);
+    }
+
+    public void setMultipleOptions(String[] options, AdapterView.OnItemClickListener listener) {
+        listOptions.setAdapter(new ArrayAdapter<>(view.getContext(),
+                R.layout.item_filter,
+                options));
+        listOptions.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        this.options = options;
         listOptions.setOnItemClickListener(listener);
+    }
+
+    public void setChecked(int position, boolean checked) {
+        listOptions.setItemChecked(position, checked);
+    }
+
+    public boolean isChecked(int position) {
+        return listOptions.isItemChecked(position);
+    }
+
+    public SparseBooleanArray getCheckedItems() {
+        return listOptions.getCheckedItemPositions();
     }
 }

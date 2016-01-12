@@ -5,7 +5,7 @@
         android:bottomRightRadius="@dimen/shape_radius"
         android:topRightRadius="@dimen/shape_radius" />
 
-    <stroke android:color="#000000" android:width="@dimen/stroke_width" />
+    <stroke android:color="@color/filter_dialog_color" android:width="@dimen/stroke_width" />
 
     <solid android:color="@android:color/transparent" />
 </shape>
