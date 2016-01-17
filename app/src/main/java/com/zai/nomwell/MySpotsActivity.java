@@ -153,10 +153,10 @@ public class MySpotsActivity extends BaseActivity
         final NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(this);
         builder.setView(nomwellInfoDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellInfoDialog.setMessage(Html.fromHtml(String.format("<p>A visible user can be discovered by friends who " +
+        nomwellInfoDialog.setMessage(noTrailingWhiteLines(Html.fromHtml(String.format("<p>A visible user can be discovered by friends who " +
                 "have him/her in their phone\'s contact. Those friends can view the user\'s spots, lists, " +
-                "and visible notes.</p><p>A visible user can also discover and view his/her friends the same way" +
-                "</p><p><b>Your profile is currently: %s</b></p>", "Visible")));
+                "and visible notes.</p><p>A visible user can also discover and view his/her friends the same way</p>"))));
+        nomwellInfoDialog.setBoldMessage("Your profile is currently: Visible");
         nomwellInfoDialog.setPositive("Turn Invisible", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,9 +178,9 @@ public class MySpotsActivity extends BaseActivity
         final NomwellInfoDialog nomwellInfoDialog = new NomwellInfoDialog(this);
         builder.setView(nomwellInfoDialog.getView());
         final AlertDialog dialog = builder.create();
-        nomwellInfoDialog.setMessage(Html.fromHtml(String.format("<p>when User\'s note for a spot is visible," +
-                " that note can be viewed by friends when they are exploring the user\'s spots or lists.</p>" +
-                "<p><b>Your default for new notes: %s</b></p>", "Visible")));
+        nomwellInfoDialog.setMessage(noTrailingWhiteLines(Html.fromHtml(String.format("<p>when User\'s note for a spot is visible," +
+                " that note can be viewed by friends when they are exploring the user\'s spots or lists.</p>"))));
+        nomwellInfoDialog.setBoldMessage("Your default for new notes: Visible");
         nomwellInfoDialog.setPositive("Turn Invisible", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,6 +194,13 @@ public class MySpotsActivity extends BaseActivity
             }
         });
         dialog.show();
+    }
+
+    private CharSequence noTrailingWhiteLines(CharSequence text) {
+        while (text.charAt(text.length() - 1) == '\n') {
+            text = text.subSequence(0, text.length() - 1);
+        }
+        return text;
     }
 
     private void updateNavigationDrawer() {

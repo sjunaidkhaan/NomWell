@@ -24,8 +24,8 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.TabbedMapActivity;
+import com.zai.nomwell.adapter.ContactSpotsAdapter;
 import com.zai.nomwell.adapter.DividerItemDecoration;
-import com.zai.nomwell.adapter.MySpotsAdapter;
 import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.dialog.NomwellFilterDialog;
 import com.zai.nomwell.dialog.NomwellMultipleChoiceListDialog;
@@ -40,7 +40,7 @@ public class MySpotVisitedFragment extends BaseFragment {
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
-    private MySpotsAdapter adapter;
+    private ContactSpotsAdapter adapter;
 
     public MySpotVisitedFragment() {
         // Required empty public constructor
@@ -68,7 +68,7 @@ public class MySpotVisitedFragment extends BaseFragment {
         rcvwSpots.setLayoutManager(layoutManager);
 
         MySpotsActivity activity = new MySpotsActivity();
-        adapter = new MySpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE,
+        adapter = new ContactSpotsAdapter(activity.getFilteredDummyData(MySpotsData.STATUS_GONE,
                 ContextCompat.getColor(getContext(), R.color.blue_filter)), false, null);
         rcvwSpots.setAdapter(adapter);
     }

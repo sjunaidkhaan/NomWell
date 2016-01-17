@@ -1,33 +1,28 @@
 package com.zai.nomwell.adapter.holder;
 
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.zai.nomwell.R;
 
 /**
  * Created by chitta on 12/8/15.
  */
-public class NomwellContactsHolder extends NomwellContactsInfoHolder implements View.OnClickListener, View.OnLongClickListener {
+public class NomwellContactsInfoHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
     private OnRecyclerViewClickListener clickListener;
 
-    public ImageView imvwIcon;
-    public AppCompatTextView txtHeader;
-    public AppCompatTextView txtSubInfo;
+    public AppCompatTextView txtInfo;
 
-    public NomwellContactsHolder(View itemView, OnRecyclerViewClickListener clickListener) {
-        super(itemView, clickListener);
+    public NomwellContactsInfoHolder(View itemView, OnRecyclerViewClickListener clickListener) {
+        super(itemView);
 
         this.clickListener = clickListener;
 
         itemView.setOnClickListener(this);
 
-        imvwIcon = (ImageView) itemView.findViewById(R.id.imvwIcon);
-        imvwIcon.setOnClickListener(this);
-        txtHeader = (AppCompatTextView) itemView.findViewById(R.id.txtHeader);
-        txtSubInfo = (AppCompatTextView) itemView.findViewById(R.id.txtSubInfo);
+        txtInfo = (AppCompatTextView) itemView.findViewById(R.id.txtInfo);
     }
 
     @Override

@@ -19,8 +19,8 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.ContactListSpotActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.adapter.ContactListsAdapter;
 import com.zai.nomwell.adapter.DividerItemDecoration;
-import com.zai.nomwell.adapter.MyListsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.dialog.NomwellInfoDialog;
 
@@ -31,7 +31,7 @@ public class ContactListsFragment extends BaseFragment implements OnRecyclerView
 
     private SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
-    private MyListsAdapter adapter;
+    private ContactListsAdapter adapter;
 
     public ContactListsFragment() {
         // Required empty public constructor
@@ -79,7 +79,7 @@ public class ContactListsFragment extends BaseFragment implements OnRecyclerView
         rcvwSpots.hideProgress();
 
         MySpotsActivity activity = new MySpotsActivity();
-        adapter = new MyListsAdapter(activity.getMyListsDummyData(), "Delete", this);
+        adapter = new ContactListsAdapter(activity.getMyListsDummyData(), "Delete", this);
         rcvwSpots.setAdapter(adapter);
         setEmptyViewVisibility();
     }

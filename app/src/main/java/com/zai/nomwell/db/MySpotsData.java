@@ -16,4 +16,5 @@ public class MySpotsData {
     public int icon;
     public int status = 0;
     public int colorFilter = 0;
+    public int type;
 }

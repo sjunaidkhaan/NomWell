@@ -44,13 +44,17 @@
     </style>
 
     <style name="ratingBar18Contacts" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/ratingbars_18</item>
+        <item name="android:progressDrawable">@drawable/ratingbars_contacts_18</item>
         <item name="android:stepSize">1</item>
-        <item name="android:tint">@color/blue_filter</item>
     </style>
 
     <style name="ratingBar24" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/ratingbars_24</item>
+        <item name="android:stepSize">1</item>
+    </style>
+
+    <style name="ratingBar24Contacts" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ratingbars_contacts_24</item>
         <item name="android:stepSize">1</item>
     </style>
 
@@ -112,17 +116,17 @@
     </style>
 
     <style name="ActionSheetStyleContacts">
-    <item name="actionSheetBackground">@android:color/transparent</item>
-    <item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>
-    <item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>
-    <item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>
-    <item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>
-    <item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>
-    <item name="cancelButtonTextColor">@color/blue_filter</item>
-    <item name="otherButtonTextColor">@color/blue_filter</item>
-    <item name="actionSheetPadding">10dp</item>
-    <item name="otherButtonSpacing">0dp</item>
-    <item name="cancelButtonMarginTop">10dp</item>
+        <item name="actionSheetBackground">@android:color/transparent</item>
+        <item name="cancelButtonBackground">@drawable/slt_as_ios7_cancel_bt</item>
+        <item name="otherButtonTopBackground">@drawable/slt_as_ios7_other_bt_top</item>
+        <item name="otherButtonMiddleBackground">@drawable/slt_as_ios7_other_bt_middle</item>
+        <item name="otherButtonBottomBackground">@drawable/slt_as_ios7_other_bt_bottom</item>
+        <item name="otherButtonSingleBackground">@drawable/slt_as_ios7_other_bt_single</item>
+        <item name="cancelButtonTextColor">@color/blue_filter</item>
+        <item name="otherButtonTextColor">@color/blue_filter</item>
+        <item name="actionSheetPadding">10dp</item>
+        <item name="otherButtonSpacing">0dp</item>
+        <item name="cancelButtonMarginTop">10dp</item>
     </style>
 
 </resources>

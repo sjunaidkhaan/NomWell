@@ -25,8 +25,8 @@ import com.zai.nomwell.AddSpotsActivity;
 import com.zai.nomwell.R;
 import com.zai.nomwell.SelectSpotActivity;
 import com.zai.nomwell.TabbedMapActivity;
+import com.zai.nomwell.adapter.ContactSpotsAdapter;
 import com.zai.nomwell.adapter.DividerItemDecoration;
-import com.zai.nomwell.adapter.MySpotsAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MySpotsData;
 import com.zai.nomwell.dialog.NomwellListDialog;
@@ -50,7 +50,7 @@ public class ContactListSpotFragment extends Fragment implements View.OnClickLis
 
     public SuperRecyclerView rcvwSpots;
     private LinearLayoutManager layoutManager;
-    private MySpotsAdapter adapter;
+    private ContactSpotsAdapter adapter;
 
     private boolean dataSet = false;
 
@@ -141,13 +141,13 @@ public class ContactListSpotFragment extends Fragment implements View.OnClickLis
         public void onTabSelected(TabLayout.Tab tab) {
             switch (tab.getPosition()) {
                 case 0:
-                    adapter = new MySpotsAdapter(getMySpotsDummyData(), false, ContactListSpotFragment.this);
+                    adapter = new ContactSpotsAdapter(getMySpotsDummyData(), false, ContactListSpotFragment.this);
                     break;
                 case 1:
-                    adapter = new MySpotsAdapter(getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, ContactListSpotFragment.this);
+                    adapter = new ContactSpotsAdapter(getFilteredDummyData(MySpotsData.STATUS_WANT_TO_GO), false, ContactListSpotFragment.this);
                     break;
                 case 2:
-                    adapter = new MySpotsAdapter(getFilteredDummyData(MySpotsData.STATUS_GONE), false, ContactListSpotFragment.this);
+                    adapter = new ContactSpotsAdapter(getFilteredDummyData(MySpotsData.STATUS_GONE), false, ContactListSpotFragment.this);
                     break;
             }
             rcvwSpots.setAdapter(adapter);

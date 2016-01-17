@@ -96,6 +96,10 @@ public class AddNewSpotFragment extends Fragment implements View.OnClickListener
             case R.id.txtList:
                 Intent selectList = new Intent(getActivity(), SelectListActivity.class);
                 selectList.putExtra(SelectListActivity.EXTRA_TITLE, "Select List");
+                selectList.putExtra(SelectListActivity.EXTRA_CREATE_LIST_TITLE, "Create List");
+                selectList.putExtra(SelectListActivity.EXTRA_ADD_TO_LIST_BUTTON_VISIBILITY, false);
+                selectList.putExtra(SelectListActivity.EXTRA_CREATE_LIST_BUTTON_VISIBILITY, true);
+                selectList.putExtra(SelectListActivity.EXTRA_SHARE_BUTTON_VISIBILITY, false);
                 startActivity(selectList);
                 break;
         }

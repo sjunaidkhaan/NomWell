@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,11 +22,13 @@ import com.malinskiy.superrecyclerview.SuperRecyclerView;
 import com.zai.nomwell.AddNewSpotActivity;
 import com.zai.nomwell.MySpotsActivity;
 import com.zai.nomwell.R;
+import com.zai.nomwell.SelectListActivity;
 import com.zai.nomwell.TabbedMapActivity;
 import com.zai.nomwell.adapter.DividerItemDecoration;
 import com.zai.nomwell.adapter.ListSpotAdapter;
 import com.zai.nomwell.adapter.holder.OnRecyclerViewClickListener;
 import com.zai.nomwell.db.MySpotsData;
+import com.zai.nomwell.util.Util;
 import com.zai.nomwell.view.NomwellHalfClickableTextView;
 
 /**
@@ -91,6 +94,43 @@ public class SelectListFragment extends Fragment implements View.OnClickListener
         adapter = new ListSpotAdapter(activity.getMySpotsDummyData(), false, this);
         rcvwSpots.setAdapter(adapter);
         setEmptyViewVisibility();
+
+        Bundle extra = getArguments();
+
+        if (extra != null) {
+            Util.log(TAG, "Bundle is not null");
+            if (extra.containsKey(SelectListActivity.EXTRA_CREATE_LIST_BUTTON_VISIBILITY)) {
+                boolean visible = extra.getBoolean(SelectListActivity.EXTRA_CREATE_LIST_BUTTON_VISIBILITY);
+                getView().findViewById(R.id.llContAddLists).setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+            } else {
+                Util.log(TAG, "Create List Button null");
+            }
+
+            if (extra.containsKey(SelectListActivity.EXTRA_CREATE_LIST_TITLE)) {
+                String text = extra.getString(SelectListActivity.EXTRA_CREATE_LIST_TITLE);
+                AppCompatTextView txtCreateList = (AppCompatTextView) getView().findViewById(R.id.txtCreateList);
+                txtCreateList.setText(text);
+            } else {
+                Util.log(TAG, "Create List Title null");
+            }
+
+            if (extra.containsKey(SelectListActivity.EXTRA_SHARE_BUTTON_VISIBILITY)) {
+                boolean visible = extra.getBoolean(SelectListActivity.EXTRA_SHARE_BUTTON_VISIBILITY);
+                getView().findViewById(R.id.llContShare).setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+            } else {
+                Util.log(TAG, "Share Button null");
+            }
+
+            if (extra.containsKey(SelectListActivity.EXTRA_ADD_TO_LIST_BUTTON_VISIBILITY)) {
+                boolean visible = extra.getBoolean(SelectListActivity.EXTRA_ADD_TO_LIST_BUTTON_VISIBILITY);
+                getView().findViewById(R.id.llContCreate).setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+            } else {
+                Util.log(TAG, "Add To List Button null");
+            }
+
+        } else {
+            Util.log(TAG, "Bundle is null");
+        }
 
     }
 

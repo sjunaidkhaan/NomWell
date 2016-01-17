@@ -21,6 +21,7 @@ public class NomwellInfoDialog {
     private AppCompatButton btnNegative;
 
     private AppCompatTextView txtMessage;
+    private AppCompatTextView txtBoldMessage;
 
     public NomwellInfoDialog(Context context) {
         this.view = LayoutInflater.from(context).inflate(R.layout.dialog_message_info, null);
@@ -33,6 +34,9 @@ public class NomwellInfoDialog {
 
     private void init() {
         txtMessage = (AppCompatTextView) view.findViewById(R.id.txtMessage);
+        txtMessage.setVisibility(View.GONE);
+        txtBoldMessage = (AppCompatTextView) view.findViewById(R.id.txtBoldMessage);
+        txtBoldMessage.setVisibility(View.GONE);
         btnPositive = (AppCompatButton) view.findViewById(R.id.btnPositive);
         btnNegative = (AppCompatButton) view.findViewById(R.id.btnNegative);
     }
@@ -42,8 +46,14 @@ public class NomwellInfoDialog {
     }
 
     public void setMessage(CharSequence message) {
-        txtMessage.setText(message.toString().trim());
+        txtMessage.setText(message.toString());
+        txtMessage.setVisibility(message != null ? View.VISIBLE : View.INVISIBLE);
         this.message = message;
+    }
+
+    public void setBoldMessage(CharSequence message) {
+        txtBoldMessage.setText(message.toString());
+        txtBoldMessage.setVisibility(message != null ? View.VISIBLE : View.INVISIBLE);
     }
 
     public void setPositive(String text, View.OnClickListener listener) {
